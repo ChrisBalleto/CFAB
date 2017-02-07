@@ -1,0 +1,38 @@
+﻿@model cfab.Models.Date
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+        <h2>@Model.DateName</h2>
+        <br />
+        <br />
+        <ul>
+            <li>Day of Date: @Model.DayOfDate</li>
+            <li>Start Address: @Model.StreetOne</li>
+            <li>Street 2: @Model.StreetTwo</li>
+            <li>Start Zipcode: @Model.Zipcode.ZipCodeNum</li>
+            <li>Is Date Chatty? @Model.IsChatty </li>
+            <li>Is Date Artsy? @Model.IsArtsy</li>
+            <li>Is Date Active? @Model.IsActive</li>
+            <li>Go out to Eat? @Model.willEat</li>
+            <li>Date Price: @Model.DatePrice</li>
+            <li>Restaurant Type: @Model.RestaurantType.RestaurantTypeName</li>
+            <li>Date Time of Day: @Model.DateTimeOfDay.DateTimeOfDayType</li>
+            <li>Optional Keyword: @Model.Keyword</li>
+        </ul>
+        
+    </div>
+
+
+    <div class="col-md-4">
+    </div>
+</div>
