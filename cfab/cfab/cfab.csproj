@@ -174,6 +174,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702070029289_firstmigration.cs" />
+    <Compile Include="Migrations\201702070029289_firstmigration.Designer.cs">
+      <DependentUpon>201702070029289_firstmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702070032308_seeddateprices.cs" />
+    <Compile Include="Migrations\201702070032308_seeddateprices.Designer.cs">
+      <DependentUpon>201702070032308_seeddateprices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702070033098_seedrestauranttype.cs" />
+    <Compile Include="Migrations\201702070033098_seedrestauranttype.Designer.cs">
+      <DependentUpon>201702070033098_seedrestauranttype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702070035042_seedtimeofday.cs" />
+    <Compile Include="Migrations\201702070035042_seedtimeofday.Designer.cs">
+      <DependentUpon>201702070035042_seedtimeofday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Date.cs" />
     <Compile Include="Models\DatePrice.cs" />
@@ -251,6 +268,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702070029289_firstmigration.resx">
+      <DependentUpon>201702070029289_firstmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702070032308_seeddateprices.resx">
+      <DependentUpon>201702070032308_seeddateprices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702070033098_seedrestauranttype.resx">
+      <DependentUpon>201702070033098_seedrestauranttype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702070035042_seedtimeofday.resx">
+      <DependentUpon>201702070035042_seedtimeofday.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
