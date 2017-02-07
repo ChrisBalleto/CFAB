@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using cfab.models;
+using cfab.Models;
 
 namespace cfab.Models
 {
@@ -24,7 +24,7 @@ namespace cfab.Models
         public DbSet<DatePrice> DatePrices { get; set; }
         public DbSet<DateTimeOfDay> DateTimeOfDays { get; set; }
         public DbSet<RestaurantType> RestaurantTypes { get; set; }
-        public DbSet<Date> Dates { get; set; }
+        public DbSet<Weather> Dates { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
