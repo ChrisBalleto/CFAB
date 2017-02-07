@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using cfab.models;
 
-namespace DateNightApp.Models
+namespace cfab.Models
 {
     public class Date
     {
