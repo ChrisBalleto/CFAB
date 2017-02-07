@@ -69,5 +69,56 @@ namespace DateNightApp.Controllers
             };
             return View("MainDateForm", viewModel);
         }
+
+        public ViewResult Details(int id)
+        {
+            var date = _context.Dates.Include(m => m.RestaurantType).Include(z => z.DatePrice).Include(y => y.DateTimeOfDay)
+            .Include(z => z.Zipcode).SingleOrDefault(c => c.Id == id);
+
+            return View(date);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Date date)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new DateFormViewModel
+                {
+                    Date = date,
+                    RestaurantTypes = _context.RestaurantTypes.ToList(),
+                    Zipcodes = _context.Zipcodes.ToList(),
+                    DatePrices = _context.DatePrices.ToList(),
+                    DateTimeOfDays = _context.DateTimeOfDays.ToList(),
+
+                };
+
+                return View("MainDateForm", viewModel);
+            }
+
+            if (date.Id == 0)
+                _context.Dates.Add(date);
+            else
+            {
+                var dateInDb = _context.Dates.Single(c => c.Id == date.Id);
+
+                /*TryUpdateModel(customerInDb); */  //Malicious users can mess-up database
+                dateInDb.DayOfDate = date.DayOfDate;
+                dateInDb.DateName = date.DateName;
+                dateInDb.StreetOne = date.StreetOne;
+                dateInDb.StreetTwo = date.StreetTwo;
+                dateInDb.ZipcodeId = date.ZipcodeId;
+                dateInDb.willEat = date.willEat;
+                dateInDb.IsActive = date.IsActive;
+                dateInDb.IsChatty = date.IsChatty;
+                dateInDb.IsArtsy = date.IsArtsy;
+                dateInDb.RestaurantType = date.RestaurantType;
+                dateInDb.DateTimeOfDay = date.DateTimeOfDay;
+                dateInDb.DatePrice = date.DatePrice;
+                //Or use AutoMapper
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Details", date);
+        }
     }
 }

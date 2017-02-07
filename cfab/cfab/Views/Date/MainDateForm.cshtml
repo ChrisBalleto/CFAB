@@ -61,15 +61,15 @@
             <div id="columnThree" class="col-md-3">
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DatePriceId)
-                    @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DayOfWeek"), "Select Pick-up Day", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Select Pick-up Day", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.RestaurantTypeId)
-                    @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "DayOfWeek"), "Select Pick-up Day", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Select Pick-up Day", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DateTimeOfDayId)
-                    @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DayOfWeek"), "Select Pick-up Day", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Select Pick-up Day", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.Keyword)
