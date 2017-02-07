@@ -1,12 +1,62 @@
+<<<<<<< HEAD
 ﻿@model cfab.Models.Weather
+=======
+<<<<<<< HEAD
+﻿@model IEnumerable<cfab.Models.Date>
+=======
+﻿@model cfab.Models.Date
+>>>>>>> fca2b69a365994ea6d7176892f32f00c6487f4d5
 
+>>>>>>> 21a398abe462f7e631e91c0b9caefce458aafea4
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Html.ActionLink("Start Planning A Date", "New", null, new { @class = "btn btn-primary" })
 
-<h3>About person you're taking on a date.</h3>
+
+<h3>Customer Information</h3>
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Date Name</th>
+            <th>Day of Date</th>
+            <th>Starting Address</th>
+            <th>Street Two</th>
+            <th>Starting Zip</th>
+            <th>Date Cost</th>
+            <th>Date Time of Day</th>
+            <th>Restaurant Type</th>
+            <th>Chatty?</th>
+            <th>Active?</th>
+            <th>Artsy?</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var date in Model)
+            {
+            <tr>
+                <td>@Html.ActionLink(date.DateName, "Edit", "Date", new {id = date.Id, }, null) </td>
+                <td>@date.DayOfDate</td>
+                <td>@date.StreetOne</td>
+                <td>@date.StreetTwo</td>
+                <td>@date.Zipcode.ZipCodeNum</td>
+                <td>@date.DatePrice</td>
+                <td>@date.DateTimeOfDay</td>
+                <td>@date.RestaurantType</td>
+                <td>@date.IsChatty</td>
+                <td>@date.IsActive</td>
+                <td>@date.IsArtsy</td>
+             </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@*<h3>About person you're taking on a date.</h3>
 
 @using (Html.BeginForm()) 
 {
@@ -57,4 +107,4 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index") @*// change to next page*@ 
-</div>
+@*</div>*@

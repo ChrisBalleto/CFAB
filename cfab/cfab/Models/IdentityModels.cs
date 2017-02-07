@@ -24,7 +24,12 @@ namespace cfab.Models
         public DbSet<DatePrice> DatePrices { get; set; }
         public DbSet<DateTimeOfDay> DateTimeOfDays { get; set; }
         public DbSet<RestaurantType> RestaurantTypes { get; set; }
+<<<<<<< HEAD
         public DbSet<Weather> Dates { get; set; }
+=======
+        public DbSet<Date> Dates { get; set; }
+        public DbSet<Zipcode> Zipcodes { get; set; }
+>>>>>>> fca2b69a365994ea6d7176892f32f00c6487f4d5
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
