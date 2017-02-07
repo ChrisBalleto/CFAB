@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace cfab.Models
 {
-    public class Weather
+    public class Date
     {
         public int Id { get; set; }
 

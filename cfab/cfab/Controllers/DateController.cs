@@ -31,10 +31,6 @@ namespace DateNightApp.Controllers
 
         public ActionResult BasicInfo()
         {
-<<<<<<< HEAD
-            var date = new Weather();
-=======
->>>>>>> fca2b69a365994ea6d7176892f32f00c6487f4d5
             return View();
         }
         public ActionResult Edit(int id)
