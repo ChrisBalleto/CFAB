@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201702070035042_seedtimeofday.Designer.cs">
       <DependentUpon>201702070035042_seedtimeofday.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702071419222_SeedUsers.cs" />
+    <Compile Include="Migrations\201702071419222_SeedUsers.Designer.cs">
+      <DependentUpon>201702071419222_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Date.cs" />
@@ -281,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702070035042_seedtimeofday.resx">
       <DependentUpon>201702070035042_seedtimeofday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071419222_SeedUsers.resx">
+      <DependentUpon>201702071419222_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
