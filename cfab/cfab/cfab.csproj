@@ -195,6 +195,22 @@
     <Compile Include="Migrations\201702071419222_SeedUsers.Designer.cs">
       <DependentUpon>201702071419222_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702071544471_seedzips.cs" />
+    <Compile Include="Migrations\201702071544471_seedzips.Designer.cs">
+      <DependentUpon>201702071544471_seedzips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702071545178_realseedzips.cs" />
+    <Compile Include="Migrations\201702071545178_realseedzips.Designer.cs">
+      <DependentUpon>201702071545178_realseedzips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702071614166_addedDateName.cs" />
+    <Compile Include="Migrations\201702071614166_addedDateName.Designer.cs">
+      <DependentUpon>201702071614166_addedDateName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702071947307_zips.cs" />
+    <Compile Include="Migrations\201702071947307_zips.Designer.cs">
+      <DependentUpon>201702071947307_zips.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Date.cs" />
@@ -203,8 +219,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RestaurantType.cs" />
+    <Compile Include="Models\Zipcode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\DateFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -279,6 +297,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Date\Index.cshtml" />
+    <Content Include="Views\Date\MainDateForm.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
@@ -304,6 +323,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702071419222_SeedUsers.resx">
       <DependentUpon>201702071419222_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071544471_seedzips.resx">
+      <DependentUpon>201702071544471_seedzips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071545178_realseedzips.resx">
+      <DependentUpon>201702071545178_realseedzips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071614166_addedDateName.resx">
+      <DependentUpon>201702071614166_addedDateName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702071947307_zips.resx">
+      <DependentUpon>201702071947307_zips.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
