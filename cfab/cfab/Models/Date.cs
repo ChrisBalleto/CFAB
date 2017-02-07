@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using cfab.Models;
 
-namespace cfab.models
+namespace cfab.Models
 {
     public class Date
     {
