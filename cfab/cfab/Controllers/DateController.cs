@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using System.Web.Mvc;
 using cfab.Models;
+using cfab.ViewModels;
 
 namespace DateNightApp.Controllers
 {
@@ -20,10 +22,56 @@ namespace DateNightApp.Controllers
             _context.Dispose();
         }
         // GET: Date
-        public ActionResult Index()  //we might want to chance index to something else. This currently this will be called when date/index is called
+        public ViewResult Index()  //we might want to chance index to something else. This currently this will be called when date/index is called
         {
-            var date = new Date();
+            var dates = _context.Dates.Include(m => m.RestaurantType).Include(z => z.Zipcode).Include(i => i.DateTimeOfDay).Include(k => k.DatePrice).ToList();
+            return View(dates);
+        }
+        
+
+        public ActionResult BasicInfo()
+        {
+<<<<<<< HEAD
+            var date = new Weather();
+=======
+>>>>>>> fca2b69a365994ea6d7176892f32f00c6487f4d5
             return View();
+        }
+        public ActionResult Edit(int id)
+        {
+            var date = _context.Dates.SingleOrDefault(c => c.Id == id);
+
+            if (date == null)
+                return HttpNotFound();
+            var viewModel = new DateFormViewModel
+            {
+                Date = date,
+                RestaurantTypes = _context.RestaurantTypes,
+                Zipcodes = _context.Zipcodes,
+                DatePrices = _context.DatePrices,
+                DateTimeOfDays = _context.DateTimeOfDays,             
+
+            };
+            return View("MainDateForm", viewModel);
+        }
+
+        public ActionResult New()
+        {
+            var restaurantTypes = _context.RestaurantTypes.ToList();
+            var dateTimeOfDays = _context.DateTimeOfDays.ToList();
+            var zipcodes = _context.Zipcodes.ToList();
+            var datePrices = _context.DatePrices.ToList();
+            var viewModel = new DateFormViewModel
+            {
+                Date = new Date(),
+
+                RestaurantTypes = restaurantTypes,
+                DatePrices = datePrices,
+                DateTimeOfDays = dateTimeOfDays,
+                Zipcodes = zipcodes,
+
+            };
+            return View("MainDateForm", viewModel);
         }
     }
 }
