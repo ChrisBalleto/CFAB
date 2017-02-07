@@ -1,59 +1,60 @@
-$(document).ready(function(){
-  $('#CHANGETHISTOWHATEVERTHEBUTTONISPLEASE').on('click', function(){
-      var apiURL = getURL();
-    $.ajax({
-      url:apiURL,
-      dataType: 'jsonp',//this needs to be added to my ajax request when i have cross origin issues
-      success: function(places){
-        console.log(places);
-        displaySongNames(places);
-      },
-    });
-  });
-});
+// $(document).ready(function(){
+//   $('#CHANGETHISTOWHATEVERTHEBUTTONISPLEASE').on('click', function(){
+//       var apiURL = getURL();
+//     $.ajax({
+//       url:apiURL,
+//       dataType: 'jsonp',//this needs to be added to my ajax request when i have cross origin issues
+//       success: function(places){
+//         console.log(places);
+//         displaySongNames(places);
+//       },
+//     });
+//   });
+// });
 
-function getUrlChatty(isChatty){
-  if(isChatty == "yes")
-
+//chatty will require two api calls and a join to create a list to display
+function getUrlChattyCoffee(isChatty){
+  if(isChatty == true)
+    return 'explore?section=coffee&near=milwaukee';
   else
     {return " ";}
-
 }
+function getUrlIsChattyDrink(isChatty){
+  if(isChatty == true)
+    return 'explore?section=drink&near=milwaukee';
+  else{return " ";}
+}
+//need to figure out how to determine
 function getUrlActive(isActive){
-  if(isActive == "yes")
-
+  if(isActive == true)
+    return 'url';
   else
     {return " ";}
 }
+//need to figure out how to determine
 function getUrlArtsy(isArtsy){
-  if(isArtsy == "yes")
-
+  if(isArtsy == true)
+    return 'url';
   else
     {return " ";}
 }
-function getUrlKeyword(keyWord){
-  if(keyWord != "yes")
-
-  else
-    {return " ";}
+function getUrlKeyword(keyword){
+  if(keyword == "chill")
+    return 'explore?near=Milwaukee&query=chill';
+  if(keyword == "romantic")
+    return 'explore?near=Milwaukee&query=romantic';
+  if(keyword == "high energy")
+    return 'explore?near=Milwaukee&query=high+energy';
+  else{return " ";}
 }
-function getUrlChill(isChill){
-  if(isChill == true)
-
-    return
-  else{return " "}
+function addFoodSection(){
+  return 'section=food&';
 }
-function getUrlRomantic(isRomantic){
-  if(isChill == true)
-
-    return
-  else{return " "}
+function addDrinksSection(){
+  return 'section=drinks&';
 }
-function getUrlHighEnergy(isHighEnergy){
-  if(isChill == true)
-
-    return
-  else{return " "}
+function addCoffeeSection(){
+  return 'section=coffee';
 }
 function getFoodURL(resturantAnswer){//to be used in further filters
   if(resturantAnswer == "yes")
@@ -71,3 +72,12 @@ function getClientSecret(){
 function getVDate(){
   return '&v=20170127';
 }
+// function filterByMenu(resturantAnswer, resultArray){
+//   if(resturantAnswer == "yes"){
+//     return resultsArray.filter(function({
+//
+//     });
+//   )
+//   }
+//
+// }
