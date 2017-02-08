@@ -1,15 +1,79 @@
-﻿@model cfab.Models.Date
+﻿@model cfab.ViewModels.DateFormViewModel
 @{
     ViewBag.Title = "Results";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Your Date!</h2>
+<h2>@Html.Raw(Model.Date.DateName)</h2>
 
+<div id="names">
+</div>
+<table id="results" class="table table-condensed table-hover table-style" border-color='white'>
+    <thead>
+        <tr>
+            <th>Venue Name</th>
+            <th>Address</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr></tr>
+    </tbody>
+</table>
 
 <script defer type="text/javascript">
-    var restaurantType = @Html.Raw(Json.Encode(Model.RestaurantType));
-    var restaurantType = @Html.Raw(Json.Encode(Model.RestaurantType));
+    var $results = $('#results');
+    var dateName = @Html.Raw(Json.Encode(Model.Date.DateName));
+    var datePrice = @Html.Raw(Json.Encode(Model.Date.DatePriceId));
+
+
+
+    $(document).ready(function(){
+            //var apiURL = getURL();
+            var apiURL = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&query=chill&price=1&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
+            dataType: 'jsonp',//this needs to be added to my ajax request when i have cross origin issues;
+          $.ajax({
+              type: 'GET',
+              url:apiURL,
+              dataType: 'jsonp',//this needs to be added to my ajax request when i have cross origin issues
+              success: function(places){
+                  console.log(places);
+                  showResults(places);
+                  //$json_results = json_decode(places,true);
+              },
+          });
+    });
+
+    function showResults(data){
+        var count = data.response;
+        var fourSquare = data.response.groups[0];
+        var fourSquareArray = sortByRating(fourSquare);
+        for(var i = 0; i < count.totalResults ;i++){
+            $results.append('<tr><td>'+ fourSquareArray[i].venue.name +'</td>'
+                + '<td>'+ fourSquareArray[i].venue.location.address+ '</td>' 
+                +  '<td>'+ fourSquareArray[i].venue.price.message+ '</td>' 
+                + '<td>'+ fourSquareArray[i].venue.rating + '</td>'
+                +'<td>'+ fourSquareArray[i].venue.hours.status+ '</td></tr>' );
+        }
+    }
+
+    function sortByRating(fourSquareData){
+        var data = eval(fourSquareData);
+        var items = data['items']
+        items.sort(function(b,a){
+            //return a.venue.rating - b.venue.rating;
+            if(a.venue.rating  == b.venue.rating )
+                return 0;
+            if(a.venue.rating  < b.venue.rating )
+                return -1;
+            if(a.venue.rating  > b.venue.rating )
+                return 1;
+        });
+        return items;
+    }
+
 
 
 

@@ -27,12 +27,27 @@ namespace DateNightApp.Controllers
             var dates = _context.Dates.Include(m => m.RestaurantType).Include(z => z.Zipcode).Include(i => i.DateTimeOfDay).Include(k => k.DatePrice).ToList();
             return View(dates);
         }
-        
 
-        public ActionResult BasicInfo()
+        public ActionResult Results(int id)
         {
-            return View();
+            {
+                var date = _context.Dates.SingleOrDefault(c => c.Id == id);
+
+                if (date == null)
+                    return HttpNotFound();
+                var viewModel = new DateFormViewModel
+                {
+                    Date = date,
+                    RestaurantTypes = _context.RestaurantTypes,
+                    Zipcodes = _context.Zipcodes,
+                    DatePrices = _context.DatePrices,
+                    DateTimeOfDays = _context.DateTimeOfDays,
+
+                };
+                return View("Results", viewModel);
+            }
         }
+
         public ActionResult Edit(int id)
         {
             var date = _context.Dates.SingleOrDefault(c => c.Id == id);
