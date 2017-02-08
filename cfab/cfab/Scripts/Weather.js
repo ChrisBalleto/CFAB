@@ -20,6 +20,6 @@ function printData(data) {
         $('#showResults').append('<tr><td>' + data.list[i].dt_txt.split(/[" "]/)[0].replace("2017-", "") + '</td>'
         + '<td>' + data.city.name + '</td>'
         + '<td>' + Math.round(data.list[i].main.temp - 242) + '</td>'
-        + '<td>' + data.list[i].weather[0].description + ' </td>')};
+        + '<td>' + data.list[i].weather[0].description + ' </td></tr>')};
         console.log(data);
 }
