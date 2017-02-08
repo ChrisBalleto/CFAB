@@ -10,9 +10,10 @@ namespace cfab.ViewModels
     {
         public Date Date { get; set; }
         public IEnumerable<Zipcode> Zipcodes { get; set; }
+        public IEnumerable<DateType> DateTypes { get; set; }
         public IEnumerable<RestaurantType> RestaurantTypes { get; set; }
         public IEnumerable<DateTimeOfDay> DateTimeOfDays { get; set; }
         public IEnumerable<DatePrice> DatePrices { get; set; }
-       
+     
     }
 }

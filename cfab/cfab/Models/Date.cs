@@ -24,22 +24,28 @@ namespace cfab.Models
         [Display(Name = "Secondary Address")]
         public string StreetTwo { get; set; }
 
-        [Display(Name = "Zip Code")]
+      
         public Zipcode Zipcode { get; set; }
 
+        [Display(Name = "Zip Code")]
         public int ZipcodeId { get; set; }
 
         [Display(Name = "Will you be going to eat?")]
         public bool willEat { get; set; }
 
-        [Display(Name = "Are they Chatty")]
-        public bool IsChatty { get; set; }
+        [Display(Name = "What best describes your date?")]
+        public DateType DateType { get; set; }
+        [Display(Name = "What best describes your date?")]
+        public int DateTypeId { get; set;}
 
-        [Display(Name = "Are they Active")]
-        public bool IsActive { get; set; }
+        //[Display(Name = "Are they Chatty")]
+        //public bool IsChatty { get; set; }
 
-        [Display(Name = "Are they Artsy")]
-        public bool IsArtsy { get; set; }
+        //[Display(Name = "Are they Active")]
+        //public bool IsActive { get; set; }
+
+        //[Display(Name = "Are they Artsy")]
+        //public bool IsArtsy { get; set; }
 
         [Display(Name = "Price Range")]
         public RestaurantType RestaurantType { get; set; }
@@ -53,11 +59,13 @@ namespace cfab.Models
         [Display(Name = "Time of Day")]
         public DateTimeOfDay DateTimeOfDay { get; set; }
 
+        [Display(Name = "Time of Date")]
         public int DateTimeOfDayId { get; set; }
 
-
+        
         public DatePrice DatePrice { get; set; }
 
+        [Display(Name = "Date Price")]
         public int DatePriceId { get; set; }
 
 
