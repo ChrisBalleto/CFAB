@@ -33,15 +33,14 @@
     $(document).ready(function(){
             //var apiURL = getURL();
             var apiURL = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&query=chill&price=1&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
-            dataType: 'jsonp',//this needs to be added to my ajax request when i have cross origin issues;
+            dataType: 'jsonp',
           $.ajax({
               type: 'GET',
               url:apiURL,
-              dataType: 'jsonp',//this needs to be added to my ajax request when i have cross origin issues
+              dataType: 'jsonp',
               success: function(places){
                   console.log(places);
                   showResults(places);
-                  //$json_results = json_decode(places,true);
               },
           });
     });

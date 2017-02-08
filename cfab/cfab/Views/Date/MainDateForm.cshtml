@@ -4,92 +4,119 @@
     ViewBag.Title = "DateForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Date New Date</h2>
-
+<center>
+    <h2>New Date</h2>
+    <br />
+    
+</center>
 <div class="row">
     <div class="col-md-1">
     </div>
-    <h2></h2>
-    @using (Html.BeginForm("Save", "Date"))
-    {
-        <div id="columnOne" class="col-md-4">
-            <h2>Basic Date Info</h2>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.DateName)
-                @Html.TextBoxFor(m => m.Date.DateName, new { @class = "form-control" })
+    <center>
+        @using (Html.BeginForm("Save", "Date"))
+        {
+            <div id="columnOne" class="col-md-3">
+                <h4>Basic Date Info</h4>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.DateName)
+                    @Html.TextBoxFor(m => m.Date.DateName, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.DayOfDate)
+                    @Html.TextBoxFor(m => m.Date.DayOfDate, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.StreetOne)
+                    @Html.TextBoxFor(m => m.Date.StreetOne, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.StreetTwo)
+                    @Html.TextBoxFor(m => m.Date.StreetTwo, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.ZipcodeId)
+                    @Html.DropDownListFor(m => m.Date.ZipcodeId, new SelectList(Model.Zipcodes, "Id", "ZipCodeNum"), "Choose ZIP", new { @class = "form-control" })
+                </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.DayOfDate)
-                @Html.TextBoxFor(m => m.Date.DayOfDate, new { @class = "form-control" })
+            <div id="columnTwo" class="col-md-4">
+                <h4>Tell Us About Your Date</h4>
+                <br />
+                <br />
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Date.IsChatty) Is your Date Chatty?
+                    </label>
+                </div>
+                <br />
+                <br />
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Date.IsActive) Is your Date Active?
+                    </label>
+                </div>
+                <br />
+                <br />
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Date.IsArtsy) Is your Date Artsy?
+                    </label>
+                </div>
+                <br />
+                <br />
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Date.willEat) Will you be going out to Eat?
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.StreetOne)
-                @Html.TextBoxFor(m => m.Date.StreetOne, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.StreetTwo)
-                @Html.TextBoxFor(m => m.Date.StreetTwo, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.ZipcodeId)
-                @Html.DropDownListFor(m => m.Date.ZipcodeId, new SelectList(Model.Zipcodes, "Id", "ZipCodeNum"), "Choose ZIP", new { @class = "form-control" })
-            </div>
-        </div>
-        <div id="columnTwo" class="col-md-3">
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.Date.IsChatty) Is your Date Chatty?
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.Date.IsActive) Is your Date Active?
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.Date.IsArtsy) Is your Date Artsy?
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.Date.willEat) Will you be going out to Eat?
-                </label>
-            </div>
-        </div>
-        <div id="columnThree" class="col-md-3">
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.DatePriceId)
-                @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Select Pick-up Day", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.RestaurantTypeId)
-                @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Select Pick-up Day", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.DateTimeOfDayId)
-                @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Select Pick-up Day", new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Date.Keyword)
-                @Html.TextBoxFor(m => m.Date.Keyword, new { @class = "form-control" })
+            <div id="columnThree" class="col-md-3">
+                <h4>Date Details</h4>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.DatePriceId)
+                    @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Select Pick-up Day", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.RestaurantTypeId)
+                    @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Select Pick-up Day", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.DateTimeOfDayId)
+                    @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Select Pick-up Day", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.Keyword)
+                    @Html.TextBoxFor(m => m.Date.Keyword, new { @class = "form-control" })
+                </div>
+
+                @Html.HiddenFor(m => m.Date.Id)
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
 
-            @Html.HiddenFor(m => m.Date.Id)
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    }   
-    <script src="@Url.Content("~/Scripts/Weather.js")"></script>   
-    <table id="showResults" class="table table-condensed table-hover table-style" border-color='white'>
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>City</th>
-        <th>Temp</th>
-        <th>Forcast</th>
-    </tr>
-    </thead>
+        }
+    </center>
+
+    <div class="col-md-1">
+    </div>
+</div>
+<center>
+    <div class="row">
+        <script src="@Url.Content("~/Scripts/Weather.js")"></script>
+        <table id="showResults" class="table table-condensed table-hover " border-color='white'>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>City</th>
+                    <th>Temp</th>
+                    <th>Forecast</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
         </table>
-    <div class="col-md-1"></div>
-        </div>
+
+    </div>
+</center>
