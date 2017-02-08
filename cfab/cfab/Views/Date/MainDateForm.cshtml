@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DayOfDate)
-                    @Html.TextBoxFor(m => m.Date.DayOfDate, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Date.DayOfDate, "{0:MM/dd/yyyy}", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.StreetOne)
@@ -40,11 +40,25 @@
                 </div>
             </div>
             <div id="columnTwo" class="col-md-4">
-                <h4>Tell Us About Your Date</h4>
+                <h4>Date Details</h4>
+                <br />
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Date.DateTypeId)
-                    @Html.DropDownListFor(m => m.Date.DateTypeId, new SelectList(Model.DateTypes, "Id", "DateTypeName"), "Choose Type", new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Date.DatePriceId)
+                    @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Choose Price", new { @class = "form-control" })
                 </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.RestaurantTypeId)
+                    @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Choose Atmosphere", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.DateTimeOfDayId)
+                    @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Choose Time", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.Keyword)
+                    @Html.TextBoxFor(m => m.Date.Keyword, new { @class = "form-control" })
+                </div>
+          
                 @*<br 
                 <br />
                 <div class="checkbox">
@@ -68,32 +82,25 @@
                 </div>
                 <br />
                 <br />*@
+
+            </div>
+            <div id="columnThree" class="col-md-3">
+                <h4>Tell Us About Your Date</h4>
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.DateTypeId)
+                    @Html.DropDownListFor(m => m.Date.DateTypeId, new SelectList(Model.DateTypes, "Id", "DateTypeName"), "Choose Type", new { @class = "form-control" })
+                </div>
+                <br />
+                <br />
                 <div class="checkbox">
                     <label>
                         @Html.CheckBoxFor(m => m.Date.willEat) Will you be going out to Eat?
                     </label>
                 </div>
-            </div>
-            <div id="columnThree" class="col-md-3">
-                <h4>Date Details</h4>
                 <br />
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Date.DatePriceId)
-                    @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Choose Price", new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Date.RestaurantTypeId)
-                    @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Choose Atmosphere", new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Date.DateTimeOfDayId)
-                    @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Choose Time", new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Date.Keyword)
-                    @Html.TextBoxFor(m => m.Date.Keyword, new { @class = "form-control" })
-                </div>
-
+                <br />
+                <br />
                 @Html.HiddenFor(m => m.Date.Id)
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
