@@ -14,27 +14,28 @@
 //   });
 // });
 
-function getFourSquareAPI(){
+function GetFourSquareAPI(){
   return 'https://api.foursquare.com/v2/';
 }
-function getClientId(){
+function GetClientId(){
   return '&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK';
 }
-function getClientSecret(){
+function GetClientSecret(){
   return '&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS';
 }
-function getLocation(){
+function GetLocation(){
   return 'explore?near=milwaukee&';
 }
-function getVDate(dayOfTheYear){
-  var identifyPosition = dayOfTheYear.lastIndexOf("/");
-  var yearToUse = dayOfTheYear.substr(identifyPosition+1);
-  var dayOfMonth = dayOfTheYear.substr(identifyPosition - 2, 2);
-  var resultsOfCheck = checkMonth(dayOfTheYear);
+function GetVDate(dayOfdate){
+  var dayOftheYear = dayOfdate.toString();
+  var identifyPosition = dayOftheYear.lastIndexOf("/");
+  var yearToUse = dayOftheYear.substr(identifyPosition+1);
+  var dayOfMonth = dayOftheYear.substr(identifyPosition - 2, 2);
+  var resultsOfCheck = CheckMonth(dayOftheYear);
   var month = resultsOfCheck.substr(0,2);
-  return '&v='+ yearToUse + month + dayOfMonth ;  //20170127
+  return '&v='+ yearToUse + month + dayOfMonth ;
 }
-function checkMonth(dayOfTheYear)
+function CheckMonth(dayOfTheYear)
 {
   if (dayOfTheYear.length != 10){
     var zero = "0";
@@ -43,52 +44,25 @@ function checkMonth(dayOfTheYear)
   else
     return dayOfTheYear;
 }
-function removeSpaces(chainedURL){
+function RemoveSpaces(chainedURL){
   return chainedURL.replace(/\s/g,'');
 }
-function addFoodSection(){
+function GetFoodSection(){
   return 'section=food&';
 }
-function addDrinksSection(){
-  return 'section=drinks&';
-}
-function addCoffeeSection(){
-  return 'section=coffee&';
-}
-function getFoodURL(resturantAnswer){//to be used in further filters
-  if(resturantAnswer == "true")
-    return 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=food&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170127';
-}
-// function concatSearchResults(firstResultSet, secondResultSet, thirdResultsSet=[], fourthResultsSet=[], fifthResultsSet=[]){
-//   return firstResultSet.concat(secondResultSet);
-// }
-//chatty will require two api calls and a join to create a list to display
-function getUrlChattyCoffee(isChatty){
+function GetUrlChatty(isChatty){
   if(isChatty == true)
-    return 'section=coffee&';
-  else
-    {return " ";}
+    return 'section=coffee&section=drink&';
 }
-function getUrlIsChattyDrink(isChatty){
-  if(isChatty == true)
-    return 'section=drink&';
-  else{return " ";}
-}
-//need to figure out how to determine
-function getUrlActive(isActive){
+function GetUrlActive(isActive){
   if(isActive == true)
-    return 'url';
-  else
-    {return " ";}
+    return 'section=outdoors';
 }
-//need to figure out how to determine
-function getUrlArtsy(isArtsy){
+function GetUrlArtsy(isArtsy){
   if(isArtsy == true)
-    return 'url';
-  else
-    {return " ";}
+    return 'section=arts';
 }
-function getUrlKeyword(keyword){
+function GetUrlKeyword(keyword){
   if(keyword == "chill")
     return 'query=chill&';
   if(keyword == "romantic")
@@ -97,7 +71,7 @@ function getUrlKeyword(keyword){
     return 'query=lively&';
   else{return " ";}
 }
-function getPrice(dateCost){
+function GetPrice(dateCost){
   if(dateCost == 1)
     return 'price=1&';
   else if(dateCost == 2)
@@ -107,7 +81,7 @@ function getPrice(dateCost){
   else if(dateCost == 4)
     return 'price=4&';
 }
-function filterByMenu(resturantAnswer, jsonResult){
+function FilterByMenu(resturantAnswer, jsonResult){
   if(resturantAnswer == true){
     var newarray= jsonResult.response.groups["0"].items.filter(function(place){
       if(place.venue.hasMenu == true || place.venue.hasMenu == undefined);
@@ -116,9 +90,47 @@ function filterByMenu(resturantAnswer, jsonResult){
     return newarray;
   }
 }
-function generateURL(chatty=false,active=false,artsy=false,isEating=false,vDate,queryWord,priceRange){
-  var mainApiRequest = getFourSquareAPI();
-  var exploreSearch = getLocation();
-  var fsClientId = getClientId();
-  var fsSecretId = getClientSecret();
+function GenerateURL(chatty=false,active=false,artsy=false,isEating=false,queryWord=" ",priceRange,vDate){
+  var mainApiRequest = GetFourSquareAPI();
+  var exploreSearch = GetLocation();
+  var fsClientId = GetClientId();
+  var fsSecretId = GetClientSecret();
+  var apiAndExploreUrl = AppendURL(mainApiRequest,exploreSearch);
+  var apiWithDescriptionUrl = AppendUrlWithDescription(chatty,active,artsy,apiAndExploreUrl);
+  var apiDescriptionandFoodUrl = AppendUrlWithResturant(isEating,apiWithDescriptionUrl);
+  var apiWithKeyword = AppendUrlWithKeyword(queryWord, apiDescriptionandFoodUrl);
+  var apiUrlWithPrice = AppendUrlWithPrice(priceRange, apiWithKeyword);
+  var apiUrlWithVdate = AppendUrlWithVdate(vDate,AppendUrlWithPrice);
+  return RemoveSpaces(apiUrlWithVdate);
+}
+function AppendURL(urlToChange, partOfUrlToAdd){
+  return urlToChange.concat(partOfUrlToAdd);
+}
+function AppendUrlWithDescription(responseForChatty, responseForActive,responseForArtsy,urlToAppend){
+  if(responseForChatty==true){
+    return urlToAppend.concat(GetUrlChatty(responseForChatty));
+  }
+  else if(responseForActive==true){
+    return urlToAppend.concat(GetUrlActive(responseForActive));
+  }
+  else if(responseForArtsy==true){
+    return urlToAppend.concat(GetUrlArtsy(responseForArtsy));
+  }
+}
+function AppendUrlWithResturant(responseForEating,urlToAppend){
+  if(responseForEating == true)
+    return urlToAppend.concat(GetFoodSection(responseForEating));
+  else
+    return urlToAppend;
+}
+function AppendUrlWithKeyword(keywordResponse,urlToAppend){
+  return urlToAppend.concat(GetUrlKeyword(keywordResponse));
+}
+function AppendUrlWithPrice(priceSelection,urlToAppend)
+{
+  return urlToAppend.concat(GetPrice(priceSelection));
+}
+function AppendUrlWithVdate(vDate, urlToAppend){
+  var vDateUrl = GetVDate(vDate);
+  return urlToAppend.concat(vDateUrl);
 }

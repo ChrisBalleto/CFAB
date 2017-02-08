@@ -93,7 +93,7 @@ namespace DateNightApp.Controllers
 
         public ViewResult Details(int id)
         {
-            var date = _context.Dates.Include(m => m.RestaurantType).Include(z => z.DatePrice).Include(y => y.DateTimeOfDay)
+            var date = _context.Dates.Include(m => m.RestaurantType).Include(z => z.DatePrice).Include(y => y.DateTimeOfDay).Include(t => t.DateType)
             .Include(z => z.Zipcode).SingleOrDefault(c => c.Id == id);
 
             return View(date);

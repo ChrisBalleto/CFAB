@@ -2,80 +2,92 @@ describe('function removeSpaces', function(){
   it('string to have spaces removed', function(){
     var testString = 'this is a test string';
     var convertedTestString = 'thisisateststring';
-    expect(removeSpaces(testString)).toEqual(convertedTestString);
+    expect(RemoveSpaces(testString)).toEqual(convertedTestString);
   });
   it('string to have spaces removed', function(){
     var testString = 'willthisstringwork';
     var convertedTestString = 'willthisstringwork';
-    expect(removeSpaces(testString)).toEqual(convertedTestString);
+    expect(RemoveSpaces(testString)).toEqual(convertedTestString);
   });
 });
-describe('function getUrlChattyCoffee', function(){
+describe('function getUrlChatty', function(){
   it('UrL return', function(){
     var isChatty = true;
-    var urlSegment = 'section=coffee&';
-    expect(getUrlChattyCoffee(isChatty)).toEqual(urlSegment);
+    var urlSegment = 'section=coffee&section=drink&';
+    expect(GetUrlChatty(isChatty)).toEqual(urlSegment);
   });
   it('Url return', function(){
     var isNotChatty = false;
     var urlSegment = " ";
-    expect(getUrlChattyCoffee(isNotChatty)).toEqual(urlSegment);
-  });
-});
-describe('function getUrlIsChattyDrink', function(){
-  it('UrL return', function(){
-    var isChatty = true;
-    var urlSegment = 'section=drink&';
-    expect(getUrlIsChattyDrink(isChatty)).toEqual(urlSegment);
-  });
-  it('Url return', function(){
-    var isNotChatty = false;
-    var urlSegment = " ";
-    expect(getUrlIsChattyDrink(isNotChatty)).toEqual(urlSegment);
+    expect(GetUrlChatty(isNotChatty)).toEqual(urlSegment);
   });
 });
 describe('function getUrlKeyword', function(){
   it('Url return', function(){
     var keyword = "chill";
     var urlSegment = 'query=chill&';
-    expect(getUrlKeyword(keyword)).toEqual(urlSegment);
+    expect(GetUrlKeyword(keyword)).toEqual(urlSegment);
   });
   it('Url return', function(){
     var keyword = "romantic";
     var urlSegment = 'query=romantic&';
-    expect(getUrlKeyword(keyword)).toEqual(urlSegment);
+    expect(GetUrlKeyword(keyword)).toEqual(urlSegment);
   });
   it('Url return', function(){
     var keyword = "high energy";
     var urlSegment = 'query=lively&';
-    expect(getUrlKeyword(keyword)).toEqual(urlSegment);
+    expect(GetUrlKeyword(keyword)).toEqual(urlSegment);
   });
 });
 describe('function checkMonth', function(){
   it('Year returned', function(){
     var testDate = "01/02/2017";
     var results = "01/02/2017";
-    expect(checkMonth(testDate)).toEqual(results);
+    expect(CheckMonth(testDate)).toEqual(results);
   });
   it('Year returned', function(){
     var testDate = "1/02/2017";
     var results = "01/02/2017";
-    expect(checkMonth(testDate)).toEqual(results);
+    expect(CheckMonth(testDate)).toEqual(results);
   });
 });
 describe('function getVDate', function(){
   it('VDate returned', function(){
     var testDate = "01/02/2017";
     var results = "&v=20170102";
-    expect(getVDate(testDate)).toEqual(results);
+    expect(GetVDate(testDate)).toEqual(results);
   });
   it('VDate returned', function(){
     var testDate = "1/02/2017";
     var results = "&v=20170102";
-    expect(getVDate(testDate)).toEqual(results);
+    expect(GetVDate(testDate)).toEqual(results);
   });
 });
-
+describe('function AppendURL', function(){
+  it('Url To Be Appended',function(){
+    var firstUrltoTest = 'https://api.foursquare.com/v2/';
+    var secondUrltoTest = 'explore?near=milwaukee&';
+    var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&';
+    expect(AppendURL(firstUrltoTest,secondUrltoTest)).toEqual(results);
+  });
+  it('Url To Be Appended',function(){
+    var firstUrltoTest = 'a b c d e f g ';
+    var secondUrltoTest = 'h i j k . l ! @ #';
+    var results = 'a b c d e f g h i j k . l ! @ #';
+    expect(AppendURL(firstUrltoTest,secondUrltoTest)).toEqual(results);
+  });
+});
+// describe('function AppendUrlWithDescription', function(){
+//   it('Url to be appended',function(){
+//     var firstUrltoTest = 'https://api.foursquare.com/v2/explore?near=milwaukee&';
+//     //var secondUrltoTest = 'section=coffee&section=drink&';
+//     var chatty = true;
+//     var active = false;
+//     var artsy = false;
+//     var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&query=chill&section=coffee&section=drink&';
+//     expect(AppendUrlWithDescription(firstUrltoTest))
+//   });
+// });
 
 // describe('function filterByMenu', function(){
 //   it('by referencing hasMenu variable',function(){
