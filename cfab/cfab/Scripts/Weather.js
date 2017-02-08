@@ -17,9 +17,10 @@ function weather() {
 
 function printData(data) {
     for (var i = 0; i < 40; i+=8) {
-        $('#showResults').append('<tr><td>' + data.list[i].dt_txt.split(/[" "]/)[0].replace("2017-", "") + '</td>'
+        $('#showResults').append('<tr><td></td><td>' + data.list[i].dt_txt.split(/[" "]/)[0].replace("2017-", "") + '</td>'
         + '<td>' + data.city.name + '</td>'
-        + '<td>' + Math.round(data.list[i].main.temp - 242) + '</td>'
-        + '<td>' + data.list[i].weather[0].description + ' </td>')};
+        + '<td>' + Math.round(data.list[i].main.temp - 242) + "\xB0F" + '</td>'
+        + '<td>' + data.list[i].weather[0].description + ' </td>'
+        + '<td>' + data.list[i].wind.speed + " mph" + ' </td></tr>')};
         console.log(data);
 }

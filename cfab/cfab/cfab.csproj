@@ -195,6 +195,22 @@
     <Compile Include="Migrations\201702071419222_SeedUsers.Designer.cs">
       <DependentUpon>201702071419222_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702082103420_datetypeid.cs" />
+    <Compile Include="Migrations\201702082103420_datetypeid.Designer.cs">
+      <DependentUpon>201702082103420_datetypeid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702082105362_seeddatetypes.cs" />
+    <Compile Include="Migrations\201702082105362_seeddatetypes.Designer.cs">
+      <DependentUpon>201702082105362_seeddatetypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702082107330_datetypesidentitymodel.cs" />
+    <Compile Include="Migrations\201702082107330_datetypesidentitymodel.Designer.cs">
+      <DependentUpon>201702082107330_datetypesidentitymodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702082145575_check.cs" />
+    <Compile Include="Migrations\201702082145575_check.Designer.cs">
+      <DependentUpon>201702082145575_check.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.Designer.cs">
@@ -216,6 +232,7 @@
     <Compile Include="Models\Date.cs" />
     <Compile Include="Models\DatePrice.cs" />
     <Compile Include="Models\DateTimeOfDay.cs" />
+    <Compile Include="Models\DateType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RestaurantType.cs" />
@@ -346,6 +363,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702071947307_zips.resx">
       <DependentUpon>201702071947307_zips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702082103420_datetypeid.resx">
+      <DependentUpon>201702082103420_datetypeid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702082105362_seeddatetypes.resx">
+      <DependentUpon>201702082105362_seeddatetypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702082107330_datetypesidentitymodel.resx">
+      <DependentUpon>201702082107330_datetypesidentitymodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702082145575_check.resx">
+      <DependentUpon>201702082145575_check.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

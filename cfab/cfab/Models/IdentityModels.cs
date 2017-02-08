@@ -21,6 +21,7 @@ namespace cfab.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<DateType> DateTypes { get; set; }
         public DbSet<DatePrice> DatePrices { get; set; }
         public DbSet<DateTimeOfDay> DateTimeOfDays { get; set; }
         public DbSet<RestaurantType> RestaurantTypes { get; set; }
