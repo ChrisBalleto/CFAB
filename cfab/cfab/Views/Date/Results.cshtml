@@ -30,21 +30,33 @@
     var datePrice = @Html.Raw(Json.Encode(Model.Date.DatePriceId));
     var restaurantType = @Html.Raw(Json.Encode(Model.Date.RestaurantTypeId));
     var dateType = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
+    var isEating = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
+    var dayOfDate = @Html.Raw(Json.Encode(Model.Date.DayOfDate));
 
-    
+
 
 
 
     $(document).ready(function(){
-            //var apiURL = getURL();
-            var apiURL = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
+        //var apiURL = getURL();
+        var apiPiece = getFourSquareAPI();
+        var clientIdPiece = getClientId();
+        var clientSecretPiece = getClientSecret();
+        var locationPiece = getLocation();
+        var vDatePiece = getVDate(dayOfDate);
+        var keywordUrlPiece = getUrlKeyword(restaurantType);
+        var priceUrlPiece = getPrice(datePrice);
+        var dateTypePiece = getUrlDateType(dateType);
+            var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + vDatePiece
+            var testApiURL = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
             dataType: 'jsonp',
           $.ajax({
               type: 'GET',
-              url:apiURL,
+              url:aApiURL,
               dataType: 'jsonp',
               success: function(places){
                   console.log(places);
+
                   showResults(places);
               },
           });
@@ -78,6 +90,15 @@
         });
         return items;
     }
+    function getUrlDateType(keyword){
+        if(keyword == 1)
+            return 'section=drinks&section=coffee&';
+        if(keyword == 2)
+            return 'section=outdoors&';
+        if(keyword == 3)
+            return 'section=arts&';
+        else{return "";}
+    }
     function getUrlKeyword(keyword){
         if(keyword == 1)
             return 'query=chill&';
@@ -85,7 +106,7 @@
             return 'query=romantic&';
         if(keyword == 3)
             return 'query=lively&';
-        else{return " ";}
+        else{return "";}
     }
     function getPrice(dateCost){
         if(dateCost == 2)
@@ -96,6 +117,42 @@
             return 'price=3&';
         else if(dateCost == 5)
             return 'price=4&';
+        else{return "";}
+    }
+
+    function filterByMenu(resturantAnswer, jsonResult){
+        if(resturantAnswer == true){
+            var newarray= jsonResult.response.groups["0"].items.filter(function(place){
+                if(place.venue.hasMenu == true || place.venue.hasMenu == undefined);
+                return place.venue;
+            });
+            return newarray;
+        }
+    }
+    function getVDate(dayOfdate){
+        var dayOftheYear = dayOfdate.toString();
+        var identifyPosition = dayOftheYear.lastIndexOf("/");
+        var yearToUse = dayOftheYear.substr(identifyPosition+1);
+        var dayOfMonth = dayOftheYear.substr(identifyPosition - 2, 2);
+        var resultsOfCheck = CheckMonth(dayOftheYear);
+        var month = resultsOfCheck.substr(0,2);
+        return '&v='+ yearToUse + month + dayOfMonth ;
+    }
+    function appendUrlWithVdate(vDate, urlToAppend){
+        var vDateUrl = GetVDate(vDate);
+        return urlToAppend.concat(vDateUrl);
+    }
+    function getFourSquareAPI(){
+        return 'https://api.foursquare.com/v2/';
+    }
+    function getClientId(){
+        return '&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK';
+    }
+    function getClientSecret(){
+        return '&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS';
+    }
+    function getLocation(){
+        return 'explore?near=milwaukee&';
     }
 
 
