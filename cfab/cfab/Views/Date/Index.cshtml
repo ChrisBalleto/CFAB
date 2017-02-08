@@ -4,24 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.ActionLink("Start Planning A Date", "New", null, new { @class = "btn btn-primary" })
+<div align="right">@Html.ActionLink("Start Planning A Date", "New", null, new { @class = "btn btn-default" })</div>
+@*@Html.ActionLink("Start Planning A Date", "New", null, new { @class = "btn btn-default" })*@
 
 
 <h3>Customer Information</h3>
-<table class="table table-condensed table-hover">
+<table id ="table" class="table table-condensed table-hover">
     <thead>
         <tr>
-            <th>Date Name</th>
-            <th>Day of Date</th>
-            <th>Starting Address</th>
-            <th>Street Two</th>
-            <th>Starting Zip</th>
-            <th>Date Cost</th>
+            <th id="tableHead">Date Name</th>
+            <th id="tableHead">Day of Date</th>
+            <th id="tableHead">Starting Address</th>
+            @*<th id="tableHead">Street Two</th>*@
+            <th id="tableHead">Starting Zip</th>
+            @*<th id="tableHead">Date Cost</th>
             <th>Date Time of Day</th>
             <th>Restaurant Type</th>
-            <th>Chatty?</th>
-            <th>Active?</th>
-            <th>Artsy?</th>
+            <th>Chatty</th>
+            <th>Active</th>
+            <th>Artsy</th>*@
+            <th></th>
 
         </tr>
     </thead>
@@ -29,73 +31,19 @@
         @foreach (var date in Model)
             {
             <tr>
-                <td>@Html.ActionLink(date.DateName, "Edit", "Date", new {id = date.Id, }, null) </td>
+                <td>@Html.ActionLink(date.DateName, "Details", "Date", new {id = date.Id, }, null) </td> @*//Details was Edit.*@
                 <td>@date.DayOfDate</td>
                 <td>@date.StreetOne</td>
-                <td>@date.StreetTwo</td>
+                @*<td>@date.StreetTwo</td>*@
                 <td>@date.Zipcode.ZipCodeNum</td>
-                <td>@date.DatePrice</td>
-                <td>@date.DateTimeOfDay</td>
-                <td>@date.RestaurantType</td>
+                @*<td>@date.DatePrice.DatePriceRange</td>
+                <td>@date.DateTimeOfDay.DateTimeOfDayType</td>
+                <td>@date.RestaurantType.RestaurantTypeName</td>
                 <td>@date.IsChatty</td>
                 <td>@date.IsActive</td>
-                <td>@date.IsArtsy</td>
+                <td>@date.IsArtsy</td>*@
+                <td>@Html.ActionLink("See This Date", "Results", "Date", new { id = date.Id, }, new { @class = "btn btn-primary" })</td>
              </tr>
         }
     </tbody>
 </table>
-
-
-
-@*<h3>About person you're taking on a date.</h3>
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <h3></h3>
-               <div class="form-group">
-            @Html.LabelFor(model => model.IsChatty, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsChatty)
-                    @Html.ValidationMessageFor(model => model.IsChatty, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsArtsy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsArtsy)
-                    @Html.ValidationMessageFor(model => model.IsArtsy, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Next" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index") @*// change to next page*@ 
-@*</div>*@

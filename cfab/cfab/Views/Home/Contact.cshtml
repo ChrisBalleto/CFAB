@@ -1,10 +1,51 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+@*<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>*@
+<style>
+    body {
+        background-image: url("../../Content/images/Contact_1.jpg");
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+        background-size: cover;   
+    }
+</style>
 
-<address>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-5 col-md-offset-7">
+            <h1>Get In Touch</h1>
+            <form>
+                <div class="form-group" id="textarea">
+                    <label for="textarea">First Name</label>
+                    <input type="email" class="form-control" id="textarea" placeholder="Enter first name">
+                    <small id="textarea"</small>
+                </div>
+                <div class="form-group">
+                    <label for="textarea">Last Name</label>
+                    <input type="email" class="form-control" id="textarea" placeholder="Enter last name">
+                    <small id="textarea"</small>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email address</label>
+                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="textarea">Message</label>
+                    <textarea class="form-control" id="textarea" rows="3" placeholder="Enter message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default buttonmargin">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@*<address>
     One Microsoft Way<br />
     Redmond, WA 98052-6399<br />
     <abbr title="Phone">P:</abbr>
@@ -14,4 +55,4 @@
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+</address>*@
