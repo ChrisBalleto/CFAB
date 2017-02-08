@@ -6939,3 +6939,7 @@ label {
 .pager .disabled > a {
   border-color: #dddddd;
 }
+#showResults{
+    table-layout: fixed;
+    margin: auto;
+}
