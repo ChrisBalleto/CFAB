@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <center>
-    <h2>New Date</h2>
+    <h1>New Date</h1>
     <br />
     
 </center>
@@ -41,7 +41,11 @@
             </div>
             <div id="columnTwo" class="col-md-4">
                 <h4>Tell Us About Your Date</h4>
-                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Date.DateTypeId)
+                    @Html.DropDownListFor(m => m.Date.DateTypeId, new SelectList(Model.DateTypes, "Id", "DateTypeName"), "Choose Type", new { @class = "form-control" })
+                </div>
+                @*<br 
                 <br />
                 <div class="checkbox">
                     <label>
@@ -63,7 +67,7 @@
                     </label>
                 </div>
                 <br />
-                <br />
+                <br />*@
                 <div class="checkbox">
                     <label>
                         @Html.CheckBoxFor(m => m.Date.willEat) Will you be going out to Eat?
@@ -75,15 +79,15 @@
                 <br />
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DatePriceId)
-                    @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Select Pick-up Day", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Choose Price", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.RestaurantTypeId)
-                    @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Select Pick-up Day", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Choose Atmosphere", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DateTimeOfDayId)
-                    @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Select Pick-up Day", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Choose Time", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.Keyword)
@@ -111,6 +115,7 @@
                     <th>City</th>
                     <th>Temp</th>
                     <th>Forecast</th>
+                    <th>Wind</th>
                 </tr>
             </thead>
             <tbody>

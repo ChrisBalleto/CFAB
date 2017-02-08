@@ -24,7 +24,7 @@ namespace DateNightApp.Controllers
         // GET: Date
         public ViewResult Index()  //we might want to chance index to something else. This currently this will be called when date/index is called
         {
-            var dates = _context.Dates.Include(m => m.RestaurantType).Include(z => z.Zipcode).Include(i => i.DateTimeOfDay).Include(k => k.DatePrice).ToList();
+            var dates = _context.Dates.Include(m => m.RestaurantType).Include(z => z.Zipcode).Include(i => i.DateTimeOfDay).Include(k => k.DatePrice).Include(j => j.DateType).ToList();
             return View(dates);
         }
 
@@ -42,6 +42,8 @@ namespace DateNightApp.Controllers
                     Zipcodes = _context.Zipcodes,
                     DatePrices = _context.DatePrices,
                     DateTimeOfDays = _context.DateTimeOfDays,
+                    DateTypes = _context.DateTypes,
+
 
                 };
                 return View("Results", viewModel);
@@ -60,7 +62,9 @@ namespace DateNightApp.Controllers
                 RestaurantTypes = _context.RestaurantTypes,
                 Zipcodes = _context.Zipcodes,
                 DatePrices = _context.DatePrices,
-                DateTimeOfDays = _context.DateTimeOfDays,             
+                DateTimeOfDays = _context.DateTimeOfDays,
+                DateTypes = _context.DateTypes,
+
 
             };
             return View("MainDateForm", viewModel);
@@ -68,6 +72,7 @@ namespace DateNightApp.Controllers
 
         public ActionResult New()
         {
+            var dateTypes = _context.DateTypes.ToList();
             var restaurantTypes = _context.RestaurantTypes.ToList();
             var dateTimeOfDays = _context.DateTimeOfDays.ToList();
             var zipcodes = _context.Zipcodes.ToList();
@@ -80,6 +85,7 @@ namespace DateNightApp.Controllers
                 DatePrices = datePrices,
                 DateTimeOfDays = dateTimeOfDays,
                 Zipcodes = zipcodes,
+                DateTypes = dateTypes,
 
             };
             return View("MainDateForm", viewModel);
@@ -105,6 +111,7 @@ namespace DateNightApp.Controllers
                     Zipcodes = _context.Zipcodes.ToList(),
                     DatePrices = _context.DatePrices.ToList(),
                     DateTimeOfDays = _context.DateTimeOfDays.ToList(),
+                    DateTypes = _context.DateTypes.ToList(),
 
                 };
 
@@ -124,12 +131,13 @@ namespace DateNightApp.Controllers
                 dateInDb.StreetTwo = date.StreetTwo;
                 dateInDb.ZipcodeId = date.ZipcodeId;
                 dateInDb.willEat = date.willEat;
-                dateInDb.IsActive = date.IsActive;
-                dateInDb.IsChatty = date.IsChatty;
-                dateInDb.IsArtsy = date.IsArtsy;
+                //dateInDb.IsActive = date.IsActive;
+                //dateInDb.IsChatty = date.IsChatty;
+                //dateInDb.IsArtsy = date.IsArtsy;
                 dateInDb.RestaurantType = date.RestaurantType;
                 dateInDb.DateTimeOfDay = date.DateTimeOfDay;
                 dateInDb.DatePrice = date.DatePrice;
+                dateInDb.DateType = date.DateType;
                 //Or use AutoMapper
             }
             _context.SaveChanges();
