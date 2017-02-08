@@ -31,7 +31,7 @@
     var restaurantType = @Html.Raw(Json.Encode(Model.Date.RestaurantTypeId));
     var dateType = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
     var isEating = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
-    var dayOfDate = @Html.Raw(Json.Encode(Model.Date.DayOfDate));
+    var dayOfDate = @Model.Date.DayOfDate;
 
 
 
@@ -43,11 +43,12 @@
         var clientIdPiece = getClientId();
         var clientSecretPiece = getClientSecret();
         var locationPiece = getLocation();
-        var vDatePiece = getVDate(dayOfDate);
+        //var jsonDateFormatted = parseJsonDate(dayOfDate);
+        var vDatePiece = getVDate(dayOfDate.toString());
         var keywordUrlPiece = getUrlKeyword(restaurantType);
         var priceUrlPiece = getPrice(datePrice);
         var dateTypePiece = getUrlDateType(dateType);
-            var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + vDatePiece
+        var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + vDatePiece + '&v=20170214';
             var testApiURL = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
             dataType: 'jsonp',
           $.ajax({
@@ -118,6 +119,10 @@
         else if(dateCost == 5)
             return 'price=4&';
         else{return "";}
+    }
+
+    function parseJsonDate(jsonDateString){
+        return new Date(parseInt(jsonDateString.replace('/Date(', '')));
     }
 
     function filterByMenu(resturantAnswer, jsonResult){
