@@ -79,7 +79,17 @@
             @Html.HiddenFor(m => m.Date.Id)
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-    }
-    <div class="col-md-1">
-    </div>
-</div>
+    }   
+    <script src="@Url.Content("~/Scripts/Weather.js")"></script>   
+    <table id="showResults" class="table table-condensed table-hover table-style" border-color='white'>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>City</th>
+        <th>Temp</th>
+        <th>Forcast</th>
+    </tr>
+    </thead>
+        </table>
+    <div class="col-md-1"></div>
+        </div>
