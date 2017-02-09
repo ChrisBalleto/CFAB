@@ -340,6 +340,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Date\Details.cshtml" />
     <Content Include="Views\Date\Results.cshtml" />
+    <Content Include="Views\Date\RandomResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
