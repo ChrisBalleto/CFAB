@@ -37,17 +37,16 @@ namespace cfab.Models
         [Display(Name = "Will you be going to eat?")]
         public bool willEat { get; set; }
 
-        [Required(ErrorMessage = "Choose An Option")]
-        [Display(Name = "Best describes your date.")]
-
+        //[Required(ErrorMessage = "Choose An Option")]
+        //[Display(Name = "Best describes your date.")]
         public DateType DateType { get; set; }
 
         [Required(ErrorMessage = "Choose An Option")]
         [Display(Name = "What best describes your date?")]
         public int DateTypeId { get; set;}
 
-        [Required(ErrorMessage = "Choose An Option")]
-        [Display(Name = "Price Range")]
+        //[Required(ErrorMessage = "Choose An Option")]
+        //[Display(Name = "Price Range")]
         public RestaurantType RestaurantType { get; set; }
 
         [Required(ErrorMessage = "Choose An Option")]
