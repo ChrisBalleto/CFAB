@@ -46,7 +46,7 @@
         //var jsonDateFormatted = parseJsonDate(dayOfDate);
         //var vDatePiece = getVDate(dayOfDate.toString());
         var keywordUrlPiece = getUrlKeyword(restaurantType);
-        var priceUrlPiece = getPrice(datePrice);
+        var priceUrlPiece = getPrice(datePrice, dateType);
         var dateTypePiece = getUrlDateType(dateType);
         var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + 'v=20171114';
             var testApiUrl = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
@@ -70,9 +70,9 @@
         for(var i = 0; i < fourSquareArray.length ;i++){
             $results.append('<tr><td>'+ fourSquareArray[i].venue.name +'</td>'
                 + '<td>'+ fourSquareArray[i].venue.location.address+ '</td>'
-                +  '<td>'+ fourSquareArray[i].venue.price.message+ '</td>'
+                +  '<td>'+ (fourSquareArray[i].venue.price === undefined ? "NA" : fourSquareArray[i].venue.price.message) + '</td>'
                 + '<td>'+ fourSquareArray[i].venue.rating + '</td>'
-                +'<td>'+ (fourSquareArray[i].venue.hours === undefined ? "No Data" : fourSquareArray[i].venue.hours.status) + '</td>'
+                +'<td>'+ (fourSquareArray[i].venue.hours === undefined ? "NA" : fourSquareArray[i].venue.hours.status) + '</td>'
                 +'<td>'+ "<a href="+fourSquareArray[i].venue.url+'>'+fourSquareArray[i].venue.url+'</a>' + '</td></tr>' );
         }
     }
@@ -100,8 +100,8 @@
             return 'section=arts&';
         else{return "";}
     }
-    function getUrlKeyword(keyword){
-        if(keyword == 1)
+    function getUrlKeyword(keyword, dateType){
+        if(keyword == 1 )
             return 'query=chill&';
         if(keyword == 2)
             return 'query=romantic&';
@@ -109,14 +109,14 @@
             return 'query=lively&';
         else{return "";}
     }
-    function getPrice(dateCost){
-        if(dateCost == 2)
+    function getPrice(dateCost, date){
+        if(dateCost == 2 && date == 1)
             return 'price=1&';
-        else if(dateCost == 3)
+        else if(dateCost == 3 && date == 1)
             return 'price=2&';
-        else if(dateCost == 4)
+        else if(dateCost == 4 && date == 1)
             return 'price=3&';
-        else if(dateCost == 5)
+        else if(dateCost == 5 && date == 1)
             return 'price=4&';
         else{return "";}
     }
