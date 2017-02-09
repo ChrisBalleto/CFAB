@@ -19,10 +19,10 @@ namespace cfab.Models
 
         public int UserId { get; set; }
 
-        [Display(Name = "Primary Address")]
+        [Display(Name = "Start Address")]
         public string StreetOne { get; set; }
 
-        [Display(Name = "Secondary Address")]
+        [Display(Name = "Alternative Address")]
         public string StreetTwo { get; set; }
 
       
