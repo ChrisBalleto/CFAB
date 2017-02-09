@@ -4,77 +4,165 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-style>
-      #map {
-        height: 100%;
-      }
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-    </style>
-  </head>
-<body>
-    <div id="floating-panel">
-        <b>Start: </b>
-        <select id="start">
-            <option value="333 North Plankinton Ave Milwaukee, WI 53203">Current Location</option>
-        </select>
-        <b>End: </b>
-        <select id="end">
-            <option value="">Destination</option>
-            <option value="142 W Wisconsin Ave, Milwaukee, WI 53203">Moes Irish Pub</option>
-            <option value="2060 N Humboldt Blvd #1, Milwaukee, WI 53212">Stubby's</option>
-            <option value="2022 E North Ave, Milwaukee, WI 53202">BBC</option>
-        </select>
-    </div>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 9,
-          center: {lat: 43.0389, lng: -87.9065}
+<h2>@Html.Raw(Model.Date.DateName)</h2>
+
+<div id="names">
+</div>
+<table id="results" class="table table-condensed table-hover table-style" border-color='white'>
+    <thead>
+        <tr>
+            <th>Venue Name</th>
+            <th>Address</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Hours</th>
+            <th>Website</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr></tr>
+    </tbody>
+</table>
+
+<script defer type="text/javascript">
+    var $results = $('#results');
+    var dateName = @Html.Raw(Json.Encode(Model.Date.DateName));
+    var datePrice = @Html.Raw(Json.Encode(Model.Date.DatePriceId));
+    var restaurantType = @Html.Raw(Json.Encode(Model.Date.RestaurantTypeId));
+    var dateType = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
+    var isEating = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
+    //var dayOfDate = @Model.Date.DayOfDate;
+
+
+
+
+
+    $(document).ready(function(){
+        //var apiURL = getURL();
+        var apiPiece = getFourSquareAPI();
+        var clientIdPiece = getClientId();
+        var clientSecretPiece = getClientSecret();
+        var locationPiece = getLocation();
+        //var jsonDateFormatted = parseJsonDate(dayOfDate);
+        //var vDatePiece = getVDate(dayOfDate.toString());
+        var keywordUrlPiece = getUrlKeyword(restaurantType);
+        var priceUrlPiece = getPrice(datePrice);
+        var dateTypePiece = getUrlDateType(dateType);
+        var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + 'v=20171114';
+            var testApiUrl = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
+            dataType: 'jsonp',
+          $.ajax({
+              type: 'GET',
+              url: apiUrl,
+              dataType: 'jsonp',
+              success: function(places){
+                  console.log(places);
+
+                  showResults(places);
+              },
+          });
+    });
+
+    function showResults(data){
+        var count = data.response;
+        var fourSquare = data.response.groups[0];
+        var fourSquareArray = sortByRating(fourSquare);
+        for(var i = 0; i < fourSquareArray.length ;i++){
+            $results.append('<tr><td>'+ fourSquareArray[i].venue.name +'</td>'
+                + '<td>'+ fourSquareArray[i].venue.location.address+ '</td>'
+                +  '<td>'+ fourSquareArray[i].venue.price.message+ '</td>'
+                + '<td>'+ fourSquareArray[i].venue.rating + '</td>'
+                +'<td>'+ (fourSquareArray[i].venue.hours === undefined ? "No Data" : fourSquareArray[i].venue.hours.status) + '</td>'
+                +'<td>'+ "<a href="+fourSquareArray[i].venue.url+'>'+fourSquareArray[i].venue.url+'</a>' + '</td></tr>' );
+        }
+    }
+
+    function sortByRating(fourSquareData){
+        var data = eval(fourSquareData);
+        var items = data['items']
+        items.sort(function(b,a){
+            //return a.venue.rating - b.venue.rating;
+            if(a.venue.rating  == b.venue.rating )
+                return 0;
+            if(a.venue.rating  < b.venue.rating )
+                return -1;
+            if(a.venue.rating  > b.venue.rating )
+                return 1;
         });
-        directionsDisplay.setMap(map);
+        return items;
+    }
+    function getUrlDateType(keyword){
+        if(keyword == 1)
+            return 'section=drinks,coffee&';
+        if(keyword == 2)
+            return 'section=outdoors&';
+        if(keyword == 3)
+            return 'section=arts&';
+        else{return "";}
+    }
+    function getUrlKeyword(keyword){
+        if(keyword == 1)
+            return 'query=chill&';
+        if(keyword == 2)
+            return 'query=romantic&';
+        if(keyword == 3)
+            return 'query=lively&';
+        else{return "";}
+    }
+    function getPrice(dateCost){
+        if(dateCost == 2)
+            return 'price=1&';
+        else if(dateCost == 3)
+            return 'price=2&';
+        else if(dateCost == 4)
+            return 'price=3&';
+        else if(dateCost == 5)
+            return 'price=4&';
+        else{return "";}
+    }
 
-        var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        };
-        document.getElementById('start').addEventListener('change', onChangeHandler);
-        document.getElementById('end').addEventListener('change', onChangeHandler);
-      }
+    function parseJsonDate(jsonDateString){
+        return new Date(parseInt(jsonDateString.replace('/Date(', '')));
+    }
 
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        directionsService.route({
-          origin: document.getElementById('start').value,
-          destination: document.getElementById('end').value,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMsdtIJeIOHIEJZGvUedcU5mNZaOha0fE&callback=initMap">
-    </script>
+    function filterByMenu(resturantAnswer, jsonResult){
+        if(resturantAnswer == true){
+            var newarray= jsonResult.response.groups["0"].items.filter(function(place){
+                if(place.venue.hasMenu == true || place.venue.hasMenu == undefined);
+                return place.venue;
+            });
+            return newarray;
+        }
+    }
+    function getVDate(dayOfdate){
+        var dayOftheYear = dayOfdate.toString();
+        var identifyPosition = dayOftheYear.lastIndexOf("/");
+        var yearToUse = dayOftheYear.substr(identifyPosition+1);
+        var dayOfMonth = dayOftheYear.substr(identifyPosition - 2, 2);
+        var resultsOfCheck = CheckMonth(dayOftheYear);
+        var month = resultsOfCheck.substr(0,2);
+        return '&v='+ yearToUse + month + dayOfMonth ;
+    }
+    function appendUrlWithVdate(vDate, urlToAppend){
+        var vDateUrl = GetVDate(vDate);
+        return urlToAppend.concat(vDateUrl);
+    }
+    function getFourSquareAPI(){
+        return 'https://api.foursquare.com/v2/venues/';
+    }
+    function getClientId(){
+        return 'client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&';
+    }
+    function getClientSecret(){
+        return 'client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&';
+    }
+    function getLocation(){
+        return 'explore?near=milwaukee&';
+    }
 
+
+
+
+</script>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help

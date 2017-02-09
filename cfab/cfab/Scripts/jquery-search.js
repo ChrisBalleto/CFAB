@@ -94,15 +94,13 @@ function FilterByMenu(resturantAnswer, jsonResult){
 function GenerateURL(response,isEating=false,queryWord=" ",priceRange,vDate){
   var mainApiRequest = GetFourSquareAPI();
   var exploreSearch = GetLocation();
-  var fsClientId = GetClientId();
-  var fsSecretId = GetClientSecret();
   var apiAndExploreUrl = AppendURL(mainApiRequest,exploreSearch);
   var apiWithDescriptionUrl = AppendUrlWithDescription(response,apiAndExploreUrl);
   var apiDescriptionandFoodUrl = AppendUrlWithResturant(isEating,apiWithDescriptionUrl);
   var apiWithKeyword = AppendUrlWithKeyword(queryWord, apiDescriptionandFoodUrl);
   var apiUrlWithPrice = AppendUrlWithPrice(priceRange, apiWithKeyword);
-  var apiUrlWithClientId = AppendUrlWithClientId(apiUrlWithPrice,fsClientId);
-  var apiUrlWithSecretId = AppendUrlWithSecretId(apiUrlWithClientId,fsSecretId);
+  var apiUrlWithClientId = AppendUrlWithClientId(apiUrlWithPrice);
+  var apiUrlWithSecretId = AppendUrlWithSecretId(apiUrlWithClientId);
   var apiUrlWithVdate = AppendUrlWithVdate(vDate,apiUrlWithSecretId);
   return RemoveSpaces(apiUrlWithVdate);
 }
@@ -133,11 +131,11 @@ function AppendUrlWithPrice(priceSelection,urlToAppend)
 {
   return urlToAppend.concat(GetPrice(priceSelection));
 }
-function AppendUrlWithClientId(urlToAppend,clientId){
-  return urlToAppend.concat(clientId);
+function AppendUrlWithClientId(urlToAppend){
+  return urlToAppend.concat(GetClientId());
 }
-function AppendUrlWithSecretId(urlToAppend,secretId){
-  return urlToAppend.concat(secretId);
+function AppendUrlWithSecretId(urlToAppend){
+  return urlToAppend.concat(GetClientSecret());
 }
 function AppendUrlWithVdate(vDate, urlToAppend){
   var vDateUrl = GetVDate(vDate);

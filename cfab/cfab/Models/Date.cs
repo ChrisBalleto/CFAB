@@ -14,15 +14,15 @@ namespace cfab.Models
         public string DateName { get; set; }
 
         [Display(Name = "Date of Date")]
-        [DisplayFormat(DataFormatString = "{0:dd MM yyyy")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DayOfDate { get; set;}
 
         public int UserId { get; set; }
 
-        [Display(Name = "Primary Address")]
+        [Display(Name = "Start Address")]
         public string StreetOne { get; set; }
 
-        [Display(Name = "Secondary Address")]
+        [Display(Name = "Alternative Address")]
         public string StreetTwo { get; set; }
 
       
