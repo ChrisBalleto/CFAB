@@ -135,10 +135,10 @@ namespace DateNightApp.Controllers
                 //dateInDb.IsActive = date.IsActive;
                 //dateInDb.IsChatty = date.IsChatty;
                 //dateInDb.IsArtsy = date.IsArtsy;
-                dateInDb.RestaurantType = date.RestaurantType;
-                dateInDb.DateTimeOfDay = date.DateTimeOfDay;
-                dateInDb.DatePrice = date.DatePrice;
-                dateInDb.DateType = date.DateType;
+                dateInDb.RestaurantTypeId = date.RestaurantTypeId;
+                dateInDb.DateTimeOfDayId = date.DateTimeOfDayId;
+                dateInDb.DatePriceId = date.DatePriceId;
+                dateInDb.DateTypeId = date.DateTypeId;
                 //Or use AutoMapper
             }
             _context.SaveChanges();

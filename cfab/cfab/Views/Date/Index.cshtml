@@ -23,7 +23,8 @@
             <th>Chatty</th>
             <th>Active</th>
             <th>Artsy</th>*@
-            <th></th>
+            <th>See Date</th>
+            <th>Edit Date</th>
 
         </tr>
     </thead>
@@ -32,7 +33,7 @@
             {
             <tr>
                 <td>@Html.ActionLink(date.DateName, "Details", "Date", new {id = date.Id, }, null) </td> @*//Details was Edit.*@
-                <td>@date.DayOfDate</td>
+                <td>@date.DayOfDate.ToShortDateString()</td>
                 <td>@date.StreetOne</td>
                 @*<td>@date.StreetTwo</td>*@
                 <td>@date.Zipcode.ZipCodeNum</td>
@@ -43,6 +44,7 @@
                 <td>@date.IsActive</td>
                 <td>@date.IsArtsy</td>*@
                 <td>@Html.ActionLink("See This Date", "Results", "Date", new { id = date.Id, }, new { @class = "btn btn-primary" })</td>
+                <td>@Html.ActionLink("Edit This Date", "Edit", "Date", new { id = date.Id, }, new { @class = "btn btn-primary" })</td>
              </tr>
         }
     </tbody>
