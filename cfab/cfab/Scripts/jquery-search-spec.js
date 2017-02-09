@@ -175,8 +175,8 @@ describe('function AppendUrlWithClientId', function(){
 });
 describe('function AppendUrlWithSecretId', function(){
   it('Url to be appended', function(){
-    var firstUrltoTest = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=coffee&section=drinks&query=lively&price=4&';
-    var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=coffee&section=drinks&query=lively&price=4&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&';
+    var firstUrltoTest = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=coffee&section=drinks&query=lively&price=4&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&';
+    var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=coffee&section=drinks&query=lively&price=4&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&';
     expect(AppendUrlWithSecretId(firstUrltoTest)).toEqual(results);
   });
 });
@@ -187,16 +187,17 @@ describe('function GenerateURL', function(){
     var queryWord ="chill";
     var price = 2;
     var date = "11/23/2016";
-    var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=coffee&section=drinks&query=chill&price=2&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20161123';
-expect(GenerateURL(response,isEating,queryWord,price,date)).toEqual(results);
+    var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=coffee&section=drinks&section=food&query=chill&price=2&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20161123';
+    expect(GenerateURL(response,isEating,queryWord,price,date)).toEqual(results);
   });
   it('Final URL', function(){
     var response = 2;
-    var isEating = true;
+    var isEating = false;
     var queryWord ="romantic";
     var price = 4;
     var date = "11/23/2016";
-    var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=coffee&section=drinks&query=chill&price=2&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20161123';
+    var results = 'https://api.foursquare.com/v2/explore?near=milwaukee&section=outdoors&query=romantic&price=4&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20161123';
+    expect(GenerateURL(response,isEating,queryWord,price,date)).toEqual(results);
   });
 });
 // describe('function FilterByMenu', function(){
