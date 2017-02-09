@@ -47,10 +47,79 @@
     var dateType = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
     var isEating = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
     //var dayOfDate = @Model.Date.DayOfDate;*@
+    var map;
+
+    function addMtsToMap(location, map) {
+
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+        });
+    }
 
     var randomDateType = randomFour();
     var randomRestType = randomThree();
     var randomDatePrice = randomFive();
+
+    function addMtsToMap(location, map) {
+
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+        });
+    }
+    function geoCode(address) {
+        geocoder = new google.maps.Geocoder();
+
+        var parseAdd = address.replace(/\s/g, "+");
+
+        geocoder.geocode({ 'address': parseAdd + "," + "milwuakee" + "," + "WI"  }, function (results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+
+                address = results[0].geometry.location;
+                addMtsToMap(address, map);
+            }
+        });
+    }
+    function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: { lat: 43.0389, lng: -87.9065 }
+        });
+        var marker = new google.maps.Marker({
+            position: {
+                lat: 43.0389,
+                lng: -87.9065,
+                map: map,
+            }
+        });
+
+
+        directionsDisplay.setMap(map);
+
+        var onChangeHandler = function () {
+            calculateAndDisplayRoute(directionsService, directionsDisplay, address, startAddress);
+        };
+        //document.getElementById('start').addEventListener('change', onChangeHandler);
+        //document.getElementById('end').addEventListener('change', onChangeHandler);
+    }
+    function calculateAndDisplayRoute(directionsService, directionsDisplay, address, startAddress) {
+        directionsService.route({
+            origin: startAddress,
+            destination: address,
+            travelMode: 'DRIVING'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+
 
 
 
@@ -82,21 +151,21 @@
           });
     });
 
-    function showResults(data){
+    function showResults(data) {
         var count = data.response;
         var fourSquare = data.response.groups[0];
         var fourSquareArray = sortByRating(fourSquare);
-        var iterations = 5;
+        var iterations = 3;
         if (fourSquareArray.length < iterations) {
             iterations = fourSquareArray.length;
         }
-        for(var i = 0; i < iterations ;i++){
-            $results.append('<tr id="row'+i+'" ><td>'+ fourSquareArray[i].venue.name +'</td>'
-                + '<td id="address' + i + '" onclick="showMap(address' + i + ');">' + fourSquareArray[i].venue.location.address + '</td>'
-                +  '<td>'+ (fourSquareArray[i].venue.price === undefined ? "NA" : fourSquareArray[i].venue.price.message) + '</td>'
-                + '<td>'+ fourSquareArray[i].venue.rating + '</td>'
-                +'<td>'+ (fourSquareArray[i].venue.hours === undefined ? "NA" : fourSquareArray[i].venue.hours.status) + '</td>'
-                +'<td>'+ "<a href="+fourSquareArray[i].venue.url+'>'+fourSquareArray[i].venue.url+'</a>' + '</td></tr>' );
+        for (var i = 0; i < iterations ; i++) {
+            $results.append('<tr id="row' + i + '" ><td>' + fourSquareArray[i].venue.name + '</td>'
+                + '<td id="address' + i + '" onclick="geoCode($(\'#address' + i + '\').val())">' + fourSquareArray[i].venue.location.address + '</td>'
+                + '<td>' + (fourSquareArray[i].venue.price === undefined ? "NA" : fourSquareArray[i].venue.price.message) + '</td>'
+                + '<td>' + fourSquareArray[i].venue.rating + '</td>'
+                + '<td>' + (fourSquareArray[i].venue.hours === undefined ? "NA" : fourSquareArray[i].venue.hours.status) + '</td>'
+                + '<td>' + "<a href=" + fourSquareArray[i].venue.url + '>' + fourSquareArray[i].venue.url + '</a>' + '</td></tr>');
         }
     }
     function randomThree() {
@@ -205,5 +274,5 @@
 
 </script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMsdtIJeIOHIEJZGvUedcU5mNZaOha0fE&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMsdtIJeIOHIEJZGvUedcU5mNZaOha0fE&callback=initMap&libraries=places,visualization">
 </script>

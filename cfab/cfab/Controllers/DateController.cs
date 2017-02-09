@@ -36,7 +36,7 @@ namespace DateNightApp.Controllers
         public ActionResult Results(int id)
         {
             {
-                var date = _context.Dates.SingleOrDefault(c => c.Id == id);
+                var date = _context.Dates.Include(m => m.Zipcode).SingleOrDefault(c => c.Id == id);
 
                 if (date == null)
                     return HttpNotFound();
