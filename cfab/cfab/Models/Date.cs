@@ -16,7 +16,7 @@ namespace cfab.Models
 
         [Display(Name = "Date of Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        //[Required(ErrorMessage = "Use the following format: mm/dd/yyyy")]
+        [Required(ErrorMessage = "Use the following format: mm/dd/yyyy")]
         //[RegularExpression(@"/^\d{2}\/\d{2}\/\d{4}/", ErrorMessage = "Use the following format: mm/dd/yyyy")]
         public DateTime DayOfDate { get; set;}
 
