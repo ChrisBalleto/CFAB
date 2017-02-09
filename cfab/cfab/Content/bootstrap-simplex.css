@@ -6943,3 +6943,9 @@ label {
     table-layout: fixed;
     margin: auto;
 }
+.field-validation-error{
+    color: red;
+}
+.input-validation-error{
+    border: 2px solid red;
+}
