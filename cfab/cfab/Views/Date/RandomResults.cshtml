@@ -23,6 +23,21 @@
         <tr></tr>
     </tbody>
 </table>
+<div id="floating-panel">
+    @*<b>Start: </b>
+        <select id="start">
+            <option value="333 North Plankinton Ave Milwaukee, WI 53203">Current Location</option>
+        </select>
+        <b>End: </b>
+        <select id="end">
+            <option value="">Destination</option>
+            <option value="142 W Wisconsin Ave, Milwaukee, WI 53203">Moes Irish Pub</option>
+            <option value="2060 N Humboldt Blvd #1, Milwaukee, WI 53212">Stubby's</option>
+            <option value="2022 E North Ave, Milwaukee, WI 53202">BBC</option>
+        </select>*@
+</div>
+@*<button onclick="calculateAndDisplayRoute(directionsService, directionsDisplay, address)">Direction</button>*@
+<div id="map"></div>
 
 <script defer type="text/javascript">
     var $results = $('#results');
@@ -71,13 +86,13 @@
         var count = data.response;
         var fourSquare = data.response.groups[0];
         var fourSquareArray = sortByRating(fourSquare);
-        var iterations = 3;
+        var iterations = 5;
         if (fourSquareArray.length < iterations) {
             iterations = fourSquareArray.length;
         }
         for(var i = 0; i < iterations ;i++){
             $results.append('<tr id="row'+i+'" ><td>'+ fourSquareArray[i].venue.name +'</td>'
-                + '<td>'+ fourSquareArray[i].venue.location.address+ '</td>'
+                + '<td id="address' + i + '" onclick="showMap(address' + i + ');">' + fourSquareArray[i].venue.location.address + '</td>'
                 +  '<td>'+ (fourSquareArray[i].venue.price === undefined ? "NA" : fourSquareArray[i].venue.price.message) + '</td>'
                 + '<td>'+ fourSquareArray[i].venue.rating + '</td>'
                 +'<td>'+ (fourSquareArray[i].venue.hours === undefined ? "NA" : fourSquareArray[i].venue.hours.status) + '</td>'
@@ -188,4 +203,7 @@
 
 
 
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMsdtIJeIOHIEJZGvUedcU5mNZaOha0fE&callback=initMap">
 </script>
