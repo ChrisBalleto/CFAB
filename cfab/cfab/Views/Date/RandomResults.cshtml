@@ -1,10 +1,10 @@
-﻿@model cfab.ViewModels.DateFormViewModel
+﻿
 @{
-    ViewBag.Title = "Results";
+    ViewBag.Title = "RandomResults";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Html.Raw(Model.Date.DateName)</h2>
+<h2>Random Date Options</h2>
 
 <div id="names">
 </div>
@@ -25,59 +25,32 @@
 </table>
 <div id="floating-panel">
     @*<b>Start: </b>
-    <select id="start">
-        <option value="333 North Plankinton Ave Milwaukee, WI 53203">Current Location</option>
-    </select>
-    <b>End: </b>
-    <select id="end">
-        <option value="">Destination</option>
-        <option value="142 W Wisconsin Ave, Milwaukee, WI 53203">Moes Irish Pub</option>
-        <option value="2060 N Humboldt Blvd #1, Milwaukee, WI 53212">Stubby's</option>
-        <option value="2022 E North Ave, Milwaukee, WI 53202">BBC</option>
-    </select>*@
+        <select id="start">
+            <option value="333 North Plankinton Ave Milwaukee, WI 53203">Current Location</option>
+        </select>
+        <b>End: </b>
+        <select id="end">
+            <option value="">Destination</option>
+            <option value="142 W Wisconsin Ave, Milwaukee, WI 53203">Moes Irish Pub</option>
+            <option value="2060 N Humboldt Blvd #1, Milwaukee, WI 53212">Stubby's</option>
+            <option value="2022 E North Ave, Milwaukee, WI 53202">BBC</option>
+        </select>*@
 </div>
 @*<button onclick="calculateAndDisplayRoute(directionsService, directionsDisplay, address)">Direction</button>*@
 <div id="map"></div>
 
 <script defer type="text/javascript">
     var $results = $('#results');
-    var dateName = @Html.Raw(Json.Encode(Model.Date.DateName));
+    @*var dateName = @Html.Raw(Json.Encode(Model.Date.DateName));
     var datePrice = @Html.Raw(Json.Encode(Model.Date.DatePriceId));
     var restaurantType = @Html.Raw(Json.Encode(Model.Date.RestaurantTypeId));
     var dateType = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
     var isEating = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
-    var startAddress = @Html.Raw(Json.Encode(Model.Date.StreetOne));
-    //var dayOfDate = @Model.Date.DayOfDate;
+    //var dayOfDate = @Model.Date.DayOfDate;*@
 
-    function initMap(address) {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 9,
-            center: {lat: 43.0389, lng: -87.9065}
-        });
-        directionsDisplay.setMap(map);
-
-        var onChangeHandler = function() {
-            calculateAndDisplayRoute(directionsService, directionsDisplay, address, startAddress);
-        };
-        //document.getElementById('start').addEventListener('change', onChangeHandler);
-        //document.getElementById('end').addEventListener('change', onChangeHandler);
-    }
-
-    function calculateAndDisplayRoute(directionsService, directionsDisplay, address, startAddress) {
-        directionsService.route({
-            origin: startAddress,
-        destination: address,
-        travelMode: 'DRIVING'
-    }, function(response, status) {
-        if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-        } else {
-            window.alert('Directions request failed due to ' + status);
-        }
-    });
-    }
+    var randomDateType = randomFour();
+    var randomRestType = randomThree();
+    var randomDatePrice = randomFive();
 
 
 
@@ -91,9 +64,9 @@
         var locationPiece = getLocation();
         //var jsonDateFormatted = parseJsonDate(dayOfDate);
         //var vDatePiece = getVDate(dayOfDate.toString());
-        var keywordUrlPiece = getUrlKeyword(restaurantType);
-        var priceUrlPiece = getPrice(datePrice, dateType);
-        var dateTypePiece = getUrlDateType(dateType);
+        var keywordUrlPiece = getUrlKeyword(randomRestType);
+        var priceUrlPiece = getPrice(randomDatePrice, randomDateType);
+        var dateTypePiece = getUrlDateType(randomDateType);
         var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + 'v=20171114';
             var testApiUrl = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
             dataType: 'jsonp',
@@ -113,23 +86,32 @@
         var count = data.response;
         var fourSquare = data.response.groups[0];
         var fourSquareArray = sortByRating(fourSquare);
-        var iterations = 3;
-        if(fourSquareArray.length < iterations){
+        var iterations = 5;
+        if (fourSquareArray.length < iterations) {
             iterations = fourSquareArray.length;
         }
         for(var i = 0; i < iterations ;i++){
             $results.append('<tr id="row'+i+'" ><td>'+ fourSquareArray[i].venue.name +'</td>'
-                + '<td id="address'+i+'" onclick="initMap(address'+i+');">'+ fourSquareArray[i].venue.location.address+ '</td>'
+                + '<td id="address' + i + '" onclick="showMap(address' + i + ');">' + fourSquareArray[i].venue.location.address + '</td>'
                 +  '<td>'+ (fourSquareArray[i].venue.price === undefined ? "NA" : fourSquareArray[i].venue.price.message) + '</td>'
                 + '<td>'+ fourSquareArray[i].venue.rating + '</td>'
                 +'<td>'+ (fourSquareArray[i].venue.hours === undefined ? "NA" : fourSquareArray[i].venue.hours.status) + '</td>'
                 +'<td>'+ "<a href="+fourSquareArray[i].venue.url+'>'+fourSquareArray[i].venue.url+'</a>' + '</td></tr>' );
         }
     }
-    function showMap(){
+    function randomThree() {
+        return Math.floor((Math.random() * 3) + 1);
 
     }
-    //'<tr id="row'+i+'" ><td>'
+    function randomFour() {
+        return Math.floor((Math.random() * 4) + 1);
+
+    }
+    function randomFive() {
+        return Math.floor((Math.random() * 5) + 1);
+
+    }
+    
 
     function sortByRating(fourSquareData){
         var data = eval(fourSquareData);
@@ -147,11 +129,13 @@
     }
     function getUrlDateType(keyword){
         if(keyword == 1)
-            return 'section=drinks,coffee&';
+            return 'section=drinks&';
         if(keyword == 2)
             return 'section=outdoors&';
         if(keyword == 3)
             return 'section=arts&';
+        if(keyword == 4)
+            return 'section=coffee&';
         else{return "";}
     }
     function getUrlKeyword(keyword, dateType){
@@ -164,6 +148,8 @@
         else{return "";}
     }
     function getPrice(dateCost, date){
+        if(dateCost == 1 && date == 1)
+            return 'price=1&';
         if(dateCost == 2 && date == 1)
             return 'price=1&';
         else if(dateCost == 3 && date == 1)
@@ -218,7 +204,6 @@
 
 
 </script>
-
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMsdtIJeIOHIEJZGvUedcU5mNZaOha0fE&callback=initMap">
 </script>
