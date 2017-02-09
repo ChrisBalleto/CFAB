@@ -31,7 +31,7 @@
     var restaurantType = @Html.Raw(Json.Encode(Model.Date.RestaurantTypeId));
     var dateType = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
     var isEating = @Html.Raw(Json.Encode(Model.Date.DateTypeId));
-    var dayOfDate = @Model.Date.DayOfDate;
+    //var dayOfDate = @Model.Date.DayOfDate;
 
 
 
@@ -44,16 +44,16 @@
         var clientSecretPiece = getClientSecret();
         var locationPiece = getLocation();
         //var jsonDateFormatted = parseJsonDate(dayOfDate);
-        var vDatePiece = getVDate(dayOfDate.toString());
+        //var vDatePiece = getVDate(dayOfDate.toString());
         var keywordUrlPiece = getUrlKeyword(restaurantType);
         var priceUrlPiece = getPrice(datePrice);
         var dateTypePiece = getUrlDateType(dateType);
-        var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + vDatePiece + '&v=20170214';
-            var testApiURL = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
+        var apiUrl = apiPiece + locationPiece + dateTypePiece + keywordUrlPiece + priceUrlPiece + clientIdPiece + clientSecretPiece + 'v=20170214';
+            var testApiUrl = 'https://api.foursquare.com/v2/venues/explore?near=milwaukee&section=coffee,drinks&query=chill&price=3&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&v=20170214';
             dataType: 'jsonp',
           $.ajax({
               type: 'GET',
-              url:aApiURL,
+              url: apiUrl,
               dataType: 'jsonp',
               success: function(places){
                   console.log(places);
@@ -72,7 +72,7 @@
                 + '<td>'+ fourSquareArray[i].venue.location.address+ '</td>'
                 +  '<td>'+ fourSquareArray[i].venue.price.message+ '</td>'
                 + '<td>'+ fourSquareArray[i].venue.rating + '</td>'
-                +'<td>'+ fourSquareArray[i].venue.hours.status+ '</td>'
+                +'<td>'+ (fourSquareArray[i].venue.hours === undefined ? "No Data" : fourSquareArray[i].venue.hours.status) + '</td>'
                 +'<td>'+ "<a href="+fourSquareArray[i].venue.url+'>'+fourSquareArray[i].venue.url+'</a>' + '</td></tr>' );
         }
     }
@@ -93,7 +93,7 @@
     }
     function getUrlDateType(keyword){
         if(keyword == 1)
-            return 'section=drinks&section=coffee&';
+            return 'section=drinks,coffee&';
         if(keyword == 2)
             return 'section=outdoors&';
         if(keyword == 3)
@@ -148,13 +148,13 @@
         return urlToAppend.concat(vDateUrl);
     }
     function getFourSquareAPI(){
-        return 'https://api.foursquare.com/v2/';
+        return 'https://api.foursquare.com/v2/venues/';
     }
     function getClientId(){
-        return '&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK';
+        return 'client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&';
     }
     function getClientSecret(){
-        return '&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS';
+        return 'client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&';
     }
     function getLocation(){
         return 'explore?near=milwaukee&';
