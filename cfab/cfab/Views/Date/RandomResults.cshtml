@@ -38,6 +38,25 @@
 </div>
 @*<button onclick="calculateAndDisplayRoute(directionsService, directionsDisplay, address)">Direction</button>*@
 <div id="map"></div>
+<center>
+    <div class="row">
+        <script src="@Url.Content("~/Scripts/Weather.js")"></script>
+        <table id="showResults" class="table table-condensed table-hover " border-color='white'>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>City</th>
+                    <th>Temp</th>
+                    <th>Forecast</th>
+                    <th>Wind</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+</center>
 
 <script defer type="text/javascript">
     var $results = $('#results');
@@ -155,7 +174,7 @@
         var count = data.response;
         var fourSquare = data.response.groups[0];
         var fourSquareArray = sortByRating(fourSquare);
-        var iterations = 3;
+        var iterations = 10;
         if (fourSquareArray.length < iterations) {
             iterations = fourSquareArray.length;
         }
