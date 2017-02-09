@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201702091518000_requiredAddedToModel.Designer.cs">
       <DependentUpon>201702091518000_requiredAddedToModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702091807594_updatedDateModelWithUnusedOptionsCausingProblemsInValidation.cs" />
+    <Compile Include="Migrations\201702091807594_updatedDateModelWithUnusedOptionsCausingProblemsInValidation.Designer.cs">
+      <DependentUpon>201702091807594_updatedDateModelWithUnusedOptionsCausingProblemsInValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.Designer.cs">
@@ -404,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702091518000_requiredAddedToModel.resx">
       <DependentUpon>201702091518000_requiredAddedToModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702091807594_updatedDateModelWithUnusedOptionsCausingProblemsInValidation.resx">
+      <DependentUpon>201702091807594_updatedDateModelWithUnusedOptionsCausingProblemsInValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
