@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div align="right">@Html.ActionLink("Start Planning A Date", "New", null, new { @class = "btn btn-default" })</div>
+<div align="right">@Html.ActionLink("Start Planning A Date", "New", null, new { @class = "btn btn-success" })</div>
 @*@Html.ActionLink("Start Planning A Date", "New", null, new { @class = "btn btn-default" })*@
 
 
@@ -43,8 +43,8 @@
                 <td>@date.IsChatty</td>
                 <td>@date.IsActive</td>
                 <td>@date.IsArtsy</td>*@
-                <td>@Html.ActionLink("See This Date", "Results", "Date", new { id = date.Id, }, new { @class = "btn btn-primary" })</td>
-                <td>@Html.ActionLink("Edit This Date", "Edit", "Date", new { id = date.Id, }, new { @class = "btn btn-primary" })</td>
+                <td>@Html.ActionLink("See This Date", "Results", "Date", new { id = date.Id, }, new { @class = "btn btn-info" })</td>
+                <td>@Html.ActionLink("Edit This Date", "Edit", "Date", new { id = date.Id, }, new { @class = "btn btn-danger" })</td>
              </tr>
         }
     </tbody>
