@@ -6957,6 +6957,13 @@ label {
   border-color: #dddddd;
 }
 #showResults{
+    table-layout: fixed;
+    margin: auto;
+}
+.field-validation-error{
+    color: red;
+}
+.input-validation-error{
+    border: 2px solid red;
 	table-layout: fixed;
 	margin: auto;
-}

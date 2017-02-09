@@ -21,14 +21,17 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DateName)
                     @Html.TextBoxFor(m => m.Date.DateName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Date.DateName)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DayOfDate)
-                    @Html.TextBoxFor(m => m.Date.DayOfDate,"{0:MM/dd/yyyy}", new { @class = "form-control" })             
+                    @Html.TextBoxFor(m => m.Date.DayOfDate,"{0:MM/dd/yyyy}", new { @class = "form-control" }) 
+                    @*@Html.ValidationMessageFor(m => m.Date.DayOfDate)*@         
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.StreetOne)
                     @Html.TextBoxFor(m => m.Date.StreetOne, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Date.StreetOne)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.StreetTwo)
@@ -37,7 +40,8 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.ZipcodeId)
                     @Html.DropDownListFor(m => m.Date.ZipcodeId, new SelectList(Model.Zipcodes, "Id", "ZipCodeNum"), "Choose ZIP", new { @class = "form-control" })
-                </div>
+                    @Html.ValidationMessageFor(m => m.Date.ZipcodeId)
+                 </div>
             </div>
             <div id="columnTwo" class="col-md-4">
                 <h4>Date Details</h4>
@@ -45,44 +49,22 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DatePriceId)
                     @Html.DropDownListFor(m => m.Date.DatePriceId, new SelectList(Model.DatePrices, "Id", "DatePriceRange"), "Choose Price", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Date.DatePriceId)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.RestaurantTypeId)
                     @Html.DropDownListFor(m => m.Date.RestaurantTypeId, new SelectList(Model.RestaurantTypes, "Id", "RestaurantTypeName"), "Choose Atmosphere", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Date.RestaurantTypeId)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DateTimeOfDayId)
                     @Html.DropDownListFor(m => m.Date.DateTimeOfDayId, new SelectList(Model.DateTimeOfDays, "Id", "DateTimeOfDayType"), "Choose Time", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Date.DateTimeOfDayId)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.Keyword)
                     @Html.TextBoxFor(m => m.Date.Keyword, new { @class = "form-control" })
                 </div>
-          
-                @*<br 
-                <br />
-                <div class="checkbox">
-                    <label>
-                        @Html.CheckBoxFor(m => m.Date.IsChatty) Is your Date Chatty?
-                    </label>
-                </div>
-                <br />
-                <br />
-                <div class="checkbox">
-                    <label>
-                        @Html.CheckBoxFor(m => m.Date.IsActive) Is your Date Active?
-                    </label>
-                </div>
-                <br />
-                <br />
-                <div class="checkbox">
-                    <label>
-                        @Html.CheckBoxFor(m => m.Date.IsArtsy) Is your Date Artsy?
-                    </label>
-                </div>
-                <br />
-                <br />*@
-
             </div>
             <div id="columnThree" class="col-md-3">
                 <h4>Tell Us About Your Date</h4>
@@ -90,12 +72,14 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Date.DateTypeId)
                     @Html.DropDownListFor(m => m.Date.DateTypeId, new SelectList(Model.DateTypes, "Id", "DateTypeName"), "Choose Type", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Date.DateTypeId)
                 </div>
                 <br />
                 <br />
                 <div class="checkbox">
                     <label>
                         @Html.CheckBoxFor(m => m.Date.willEat) Will you be going out to Eat?
+                        @Html.ValidationMessageFor(m => m.Date.willEat)
                     </label>
                 </div>
                 <br />
