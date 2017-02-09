@@ -22,6 +22,7 @@ namespace DateNightApp.Controllers
             _context.Dispose();
         }
         // GET: Date
+        [Authorize]
         public ViewResult Index()  //we might want to chance index to something else. This currently this will be called when date/index is called
         {
             var dates = _context.Dates.Include(m => m.RestaurantType).Include(z => z.Zipcode).Include(i => i.DateTimeOfDay).Include(k => k.DatePrice).Include(j => j.DateType).ToList();

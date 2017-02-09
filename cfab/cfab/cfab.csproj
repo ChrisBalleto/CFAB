@@ -211,6 +211,18 @@
     <Compile Include="Migrations\201702082145575_check.Designer.cs">
       <DependentUpon>201702082145575_check.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702090049538_data.cs" />
+    <Compile Include="Migrations\201702090049538_data.Designer.cs">
+      <DependentUpon>201702090049538_data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702090103005_workingOnDateModel.cs" />
+    <Compile Include="Migrations\201702090103005_workingOnDateModel.Designer.cs">
+      <DependentUpon>201702090103005_workingOnDateModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702090115403_addedstuff.cs" />
+    <Compile Include="Migrations\201702090115403_addedstuff.Designer.cs">
+      <DependentUpon>201702090115403_addedstuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.Designer.cs">
@@ -375,6 +387,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702082145575_check.resx">
       <DependentUpon>201702082145575_check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702090049538_data.resx">
+      <DependentUpon>201702090049538_data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702090103005_workingOnDateModel.resx">
+      <DependentUpon>201702090103005_workingOnDateModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702090115403_addedstuff.resx">
+      <DependentUpon>201702090115403_addedstuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
