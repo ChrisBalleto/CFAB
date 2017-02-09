@@ -28,6 +28,10 @@ namespace DateNightApp.Controllers
             var dates = _context.Dates.Include(m => m.RestaurantType).Include(z => z.Zipcode).Include(i => i.DateTimeOfDay).Include(k => k.DatePrice).Include(j => j.DateType).ToList();
             return View(dates);
         }
+        public ViewResult RandomResults()
+        {
+            return View("RandomResults");
+        }
 
         public ActionResult Results(int id)
         {

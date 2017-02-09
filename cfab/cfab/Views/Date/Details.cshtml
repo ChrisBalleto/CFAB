@@ -26,11 +26,13 @@
             <li>Date Personality: @Model.DateType.DateTypeName</li>
             <li>Go out to Eat? @Model.willEat</li>
             <li>Optional Keyword: @Model.Keyword</li>
+            
         </ul>
-
     </div>
 
 
-    <div class="col-md-4">
+    <div class="col-md-6 col-md-offset-6">
+        <br />
+        <right><td>@Html.ActionLink("Back to Date-A-Base", "Index", "Date", new { @class = "btn btn-info" })</td></right>
     </div>
 </div>

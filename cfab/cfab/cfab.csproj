@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201702090115403_addedstuff.Designer.cs">
       <DependentUpon>201702090115403_addedstuff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702091518000_requiredAddedToModel.cs" />
+    <Compile Include="Migrations\201702091518000_requiredAddedToModel.Designer.cs">
+      <DependentUpon>201702091518000_requiredAddedToModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.cs" />
     <Compile Include="Migrations\201702071544471_seedzips.Designer.cs">
@@ -340,6 +344,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Date\Details.cshtml" />
     <Content Include="Views\Date\Results.cshtml" />
+    <Content Include="Views\Date\RandomResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -396,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702090115403_addedstuff.resx">
       <DependentUpon>201702090115403_addedstuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702091518000_requiredAddedToModel.resx">
+      <DependentUpon>201702091518000_requiredAddedToModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
