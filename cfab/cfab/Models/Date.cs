@@ -33,7 +33,7 @@ namespace cfab.Models
         [Display(Name = "Will you be going to eat?")]
         public bool willEat { get; set; }
 
-        [Display(Name = "What best describes your date?")]
+        [Display(Name = "Best describes your date.")]
         public DateType DateType { get; set; }
         [Display(Name = "What best describes your date?")]
         public int DateTypeId { get; set;}

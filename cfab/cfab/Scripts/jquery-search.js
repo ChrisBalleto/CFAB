@@ -18,22 +18,23 @@ function GetFourSquareAPI(){
   return 'https://api.foursquare.com/v2/';
 }
 function GetClientId(){
-  return '&client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK';
+  return 'client_id=1Y32SY1QBKL3UNRRDO5HFGXEBVT40DMQBCRZE0MUATAJNQMK&';
 }
 function GetClientSecret(){
-  return '&client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS';
+  return 'client_secret=UE3VNOOO30ZHVUCXKMFPDJZUYQZOM4XI0JTUH5CJQZDUG5QS&';
 }
 function GetLocation(){
   return 'explore?near=milwaukee&';
 }
-function GetVDate(dayOfdate){
-  var dayOftheYear = dayOfdate.toString();
+function GetVDate(dayOftheYear){
+  //var dateSubstring = dayOfdate.substr(0,10);
+  //var dayOftheYear = dateSubstring.trim(" ");
   var identifyPosition = dayOftheYear.lastIndexOf("/");
   var yearToUse = dayOftheYear.substr(identifyPosition+1);
   var dayOfMonth = dayOftheYear.substr(identifyPosition - 2, 2);
   var resultsOfCheck = CheckMonth(dayOftheYear);
   var month = resultsOfCheck.substr(0,2);
-  return '&v='+ yearToUse + month + dayOfMonth ;
+  return 'v='+ yearToUse + month + dayOfMonth ;
 }
 function CheckMonth(dayOfTheYear)
 {
@@ -51,16 +52,16 @@ function GetFoodSection(){
   return 'section=food&';
 }
 function GetUrlChatty(isChatty){
-  if(isChatty == true)
-    return 'section=coffee&section=drink&';
+  if(isChatty == 1)
+    return 'section=coffee&section=drinks&';
 }
 function GetUrlActive(isActive){
-  if(isActive == true)
-    return 'section=outdoors';
+  if(isActive == 2)
+    return 'section=outdoors&';
 }
 function GetUrlArtsy(isArtsy){
-  if(isArtsy == true)
-    return 'section=arts';
+  if(isArtsy == 3)
+    return 'section=arts&';
 }
 function GetUrlKeyword(keyword){
   if(keyword == "chill")
@@ -69,7 +70,7 @@ function GetUrlKeyword(keyword){
     return 'query=romantic&';
   if(keyword == "high energy")
     return 'query=lively&';
-  else{return " ";}
+  else{return "";}
 }
 function GetPrice(dateCost){
   if(dateCost == 1)
@@ -90,31 +91,33 @@ function FilterByMenu(resturantAnswer, jsonResult){
     return newarray;
   }
 }
-function GenerateURL(chatty=false,active=false,artsy=false,isEating=false,queryWord=" ",priceRange,vDate){
+function GenerateURL(response,isEating=false,queryWord=" ",priceRange,vDate){
   var mainApiRequest = GetFourSquareAPI();
   var exploreSearch = GetLocation();
   var fsClientId = GetClientId();
   var fsSecretId = GetClientSecret();
   var apiAndExploreUrl = AppendURL(mainApiRequest,exploreSearch);
-  var apiWithDescriptionUrl = AppendUrlWithDescription(chatty,active,artsy,apiAndExploreUrl);
+  var apiWithDescriptionUrl = AppendUrlWithDescription(response,apiAndExploreUrl);
   var apiDescriptionandFoodUrl = AppendUrlWithResturant(isEating,apiWithDescriptionUrl);
   var apiWithKeyword = AppendUrlWithKeyword(queryWord, apiDescriptionandFoodUrl);
   var apiUrlWithPrice = AppendUrlWithPrice(priceRange, apiWithKeyword);
-  var apiUrlWithVdate = AppendUrlWithVdate(vDate,AppendUrlWithPrice);
+  var apiUrlWithClientId = AppendUrlWithClientId(apiUrlWithPrice,fsClientId);
+  var apiUrlWithSecretId = AppendUrlWithSecretId(apiUrlWithClientId,fsSecretId);
+  var apiUrlWithVdate = AppendUrlWithVdate(vDate,apiUrlWithSecretId);
   return RemoveSpaces(apiUrlWithVdate);
 }
 function AppendURL(urlToChange, partOfUrlToAdd){
   return urlToChange.concat(partOfUrlToAdd);
 }
-function AppendUrlWithDescription(responseForChatty, responseForActive,responseForArtsy,urlToAppend){
-  if(responseForChatty==true){
-    return urlToAppend.concat(GetUrlChatty(responseForChatty));
+function AppendUrlWithDescription(response, urlToAppend){
+  if(response==1){
+    return urlToAppend.concat(GetUrlChatty(response));
   }
-  else if(responseForActive==true){
-    return urlToAppend.concat(GetUrlActive(responseForActive));
+  else if(response==2){
+    return urlToAppend.concat(GetUrlActive(response));
   }
-  else if(responseForArtsy==true){
-    return urlToAppend.concat(GetUrlArtsy(responseForArtsy));
+  else if(response==3){
+    return urlToAppend.concat(GetUrlArtsy(response));
   }
 }
 function AppendUrlWithResturant(responseForEating,urlToAppend){
@@ -129,6 +132,12 @@ function AppendUrlWithKeyword(keywordResponse,urlToAppend){
 function AppendUrlWithPrice(priceSelection,urlToAppend)
 {
   return urlToAppend.concat(GetPrice(priceSelection));
+}
+function AppendUrlWithClientId(urlToAppend,clientId){
+  return urlToAppend.concat(clientId);
+}
+function AppendUrlWithSecretId(urlToAppend,secretId){
+  return urlToAppend.concat(secretId);
 }
 function AppendUrlWithVdate(vDate, urlToAppend){
   var vDateUrl = GetVDate(vDate);
